@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SchoolScheduleDBModelStoreContainer" CdmEntityContainer="SchoolScheduleDBEntities">
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="SchoolScheduleDBModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="MinimunSemesterAllowed" ColumnName="MinimunSemesterAllowed" />
+          <ScalarProperty Name="PreviousCourseId" ColumnName="PreviousCourseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchoolRoles">
+      <EntityTypeMapping TypeName="SchoolScheduleDBModel.SchoolRole">
+        <MappingFragment StoreEntitySet="SchoolRole">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SchoolScheduleDBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="CurrentSemester" ColumnName="CurrentSemester" />
+          <ScalarProperty Name="IsGraduated" ColumnName="IsGraduated" />
+          <ScalarProperty Name="IsExpelled" ColumnName="IsExpelled" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CourseStatus">
+      <EntityTypeMapping TypeName="SchoolScheduleDBModel.CourseStatu">
+        <MappingFragment StoreEntitySet="CourseStatus">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Degrees">
+      <EntityTypeMapping TypeName="SchoolScheduleDBModel.Degree">
+        <MappingFragment StoreEntitySet="Degree">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserCourses">
+      <EntityTypeMapping TypeName="SchoolScheduleDBModel.UserCourse">
+        <MappingFragment StoreEntitySet="UserCourse">
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

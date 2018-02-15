@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[CourseStatus]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Description] VARCHAR(MAX) NULL
+)

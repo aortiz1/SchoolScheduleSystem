@@ -1,0 +1,9 @@
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\bin\Debug\SchoolSchedule.Service.dll
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\bin\Debug\SchoolSchedule.Service.pdb
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\obj\Debug\SchoolSchedule.Service.csprojResolveAssemblyReference.cache
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\obj\Debug\SchoolSchedule.Service.dll
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\obj\Debug\SchoolSchedule.Service.pdb
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\bin\Debug\SSS.DataLayer.dll
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\bin\Debug\EntityFramework.dll
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\bin\Debug\SSS.DataLayer.pdb
+C:\archivos\SchoolScheduleSystemCreati\SchoolScheduleSystem\SchoolSchedule.Service\bin\Debug\EntityFramework.xml

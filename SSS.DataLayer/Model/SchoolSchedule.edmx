@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SchoolScheduleDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="MinimunSemesterAllowed" Type="int" />
+          <Property Name="PreviousCourseId" Type="uniqueidentifier" />
+          <Property Name="DegreeId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="CourseStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="SchoolRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="varchar(max)" />
+          <Property Name="FirstName" Type="varchar(max)" />
+          <Property Name="LastName" Type="varchar(max)" />
+          <Property Name="PasswordHash" Type="varchar(max)" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="CurrentSemester" Type="int" />
+          <Property Name="IsGraduated" Type="bit" />
+          <Property Name="IsExpelled" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CourseId" Type="uniqueidentifier" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Status" Type="uniqueidentifier" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="Semester" Type="int" />
+        </EntityType>
+        <Association Name="FK_Course_Degree">
+          <End Role="Degree" Type="Self.Degree" Multiplicity="0..1" />
+          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="DegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCourse_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="UserCourse" Type="Self.UserCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCourse_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserCourse" Type="Self.UserCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCourse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolScheduleDBModelStoreContainer">
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseStatus" EntityType="Self.CourseStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolRole" EntityType="Self.SchoolRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCourse" EntityType="Self.UserCourse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Course_Degree" Association="Self.FK_Course_Degree">
+            <End Role="Degree" EntitySet="Degree" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCourse_Course" Association="Self.FK_UserCourse_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="UserCourse" EntitySet="UserCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCourse_User" Association="Self.FK_UserCourse_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserCourse" EntitySet="UserCourse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolScheduleDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MinimunSemesterAllowed" Type="Int32" />
+          <Property Name="PreviousCourseId" Type="Guid" />
+          <Property Name="DegreeId" Type="Guid" />
+          <NavigationProperty Name="Degree" Relationship="SchoolScheduleDBModel.FK_Course_Degree" FromRole="Course" ToRole="Degree" />
+          <NavigationProperty Name="UserCourses" Relationship="SchoolScheduleDBModel.FK_UserCourse_Course" FromRole="Course" ToRole="UserCourse" />
+        </EntityType>
+        <EntityType Name="SchoolRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="CurrentSemester" Type="Int32" />
+          <Property Name="IsGraduated" Type="Boolean" />
+          <Property Name="IsExpelled" Type="Boolean" />
+          <NavigationProperty Name="UserCourses" Relationship="SchoolScheduleDBModel.FK_UserCourse_User" FromRole="User" ToRole="UserCourse" />
+        </EntityType>
+        <EntityContainer Name="SchoolScheduleDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="SchoolRoles" EntityType="Self.SchoolRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="CourseStatus" EntityType="SchoolScheduleDBModel.CourseStatu" />
+          <EntitySet Name="Degrees" EntityType="SchoolScheduleDBModel.Degree" />
+          <EntitySet Name="UserCourses" EntityType="SchoolScheduleDBModel.UserCourse" />
+          <AssociationSet Name="FK_Course_Degree" Association="SchoolScheduleDBModel.FK_Course_Degree">
+            <End Role="Degree" EntitySet="Degrees" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCourse_Course" Association="SchoolScheduleDBModel.FK_UserCourse_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="UserCourse" EntitySet="UserCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCourse_User" Association="SchoolScheduleDBModel.FK_UserCourse_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserCourse" EntitySet="UserCourses" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CourseStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Courses" Relationship="SchoolScheduleDBModel.FK_Course_Degree" FromRole="Degree" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="UserCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CourseId" Type="Guid" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Guid" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="Semester" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="SchoolScheduleDBModel.FK_UserCourse_Course" FromRole="UserCourse" ToRole="Course" />
+          <NavigationProperty Name="User" Relationship="SchoolScheduleDBModel.FK_UserCourse_User" FromRole="UserCourse" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Course_Degree">
+          <End Type="SchoolScheduleDBModel.Degree" Role="Degree" Multiplicity="0..1" />
+          <End Type="SchoolScheduleDBModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="DegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCourse_Course">
+          <End Type="SchoolScheduleDBModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="SchoolScheduleDBModel.UserCourse" Role="UserCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCourse_User">
+          <End Type="SchoolScheduleDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SchoolScheduleDBModel.UserCourse" Role="UserCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCourse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolScheduleDBModelStoreContainer" CdmEntityContainer="SchoolScheduleDBEntities">
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MinimunSemesterAllowed" ColumnName="MinimunSemesterAllowed" />
+                <ScalarProperty Name="PreviousCourseId" ColumnName="PreviousCourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolRoles">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.SchoolRole">
+              <MappingFragment StoreEntitySet="SchoolRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CurrentSemester" ColumnName="CurrentSemester" />
+                <ScalarProperty Name="IsGraduated" ColumnName="IsGraduated" />
+                <ScalarProperty Name="IsExpelled" ColumnName="IsExpelled" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseStatus">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.CourseStatu">
+              <MappingFragment StoreEntitySet="CourseStatus">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degrees">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.Degree">
+              <MappingFragment StoreEntitySet="Degree">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCourses">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.UserCourse">
+              <MappingFragment StoreEntitySet="UserCourse">
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
