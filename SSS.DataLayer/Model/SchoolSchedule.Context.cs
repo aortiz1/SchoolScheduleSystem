@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShoolSchedule.DataLayer.Model
+namespace SchoolSchedule.DataLayer.Model
 {
     using System;
     using System.Data.Entity;

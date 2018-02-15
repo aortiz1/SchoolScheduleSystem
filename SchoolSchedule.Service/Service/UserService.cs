@@ -1,7 +1,7 @@
 ﻿using SchoolSchedule.Service.Contracts;
-using ShoolSchedule.DataLayer.Contracts;
-using ShoolSchedule.DataLayer.Model;
-using ShoolSchedule.DataLayer.Repository;
+using SchoolSchedule.DataLayer.Contracts;
+using SchoolSchedule.DataLayer.Model;
+using SchoolSchedule.DataLayer.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

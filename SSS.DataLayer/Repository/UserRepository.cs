@@ -1,5 +1,5 @@
-﻿using ShoolSchedule.DataLayer.Contracts;
-using ShoolSchedule.DataLayer.Model;
+﻿using SchoolSchedule.DataLayer.Contracts;
+using SchoolSchedule.DataLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoolSchedule.DataLayer.Repository
+namespace SchoolSchedule.DataLayer.Repository
 {
     public class UserRepository: IUserRepository
     {

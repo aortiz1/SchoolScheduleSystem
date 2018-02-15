@@ -7,8 +7,8 @@
     <ProjectGuid>{EA3853EF-3BA4-43C6-8C3B-BF7525964BDA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SSS.DataLayer</RootNamespace>
-    <AssemblyName>SSS.DataLayer</AssemblyName>
+    <RootNamespace>SchoolSchedule.DataLayer</RootNamespace>
+    <AssemblyName>SchoolSchedule.DataLayer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
