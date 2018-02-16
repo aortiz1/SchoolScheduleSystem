@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div id="wrapper" class="active">
+
+        <!-- Sidebar -->
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul id="sidebar_menu" class="sidebar-nav">
+                <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span class="oi oi-menu"></span></a></li>
+            </ul>
+            <ul class="sidebar-nav" id="sidebar">
+                <li><a>Student profile<span class="pull-right sub_icon glyphicon glyphicon-link"></span></a></li>
+                <li><a>Courses<span class="pull-right subsub_icon glyphicon glyphicon-link"></span></a></li>
+            </ul>
+        </div>
+
+        <!-- Page content -->
+        <div id="page-content-wrapper">
+            <!-- Keep all page content within the page-content inset div! -->
+            <div class="page-content inset">
+                <div class="row">
+                    <div class="col-md-12">
+                       <h1>Content here</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer >
+
+         
+            <!--/.Footer Links-->
+            <!--Copyright-->
+            <div class="footer-copyright">
+                <div class="container-fluid">
+                    © 2015 Copyright: <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
+
+                </div>
+            </div>
+            <!--/.Copyright-->
+
+        </footer>
+    </div>
+</body>
+</html>
+<script src="Scripts/jquery-3.0.0.min.js"></script>
+<script src="Scripts/bootstrap.min.js"></script>
+
+<link href="Content/bootstrap.min.css" rel="stylesheet" />
+<link href="Content/open-iconic-bootstrap.css" rel="stylesheet" />
+<link href="Content/customstyle.css" rel="stylesheet" />
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("active");
+    });
+</script>

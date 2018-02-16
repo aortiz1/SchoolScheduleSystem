@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSchedule.API", "Schoo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSchedule.API.Tests", "SchoolSchedule.API.Tests\SchoolSchedule.API.Tests.csproj", "{FF3007B0-95F1-42D2-B48C-F44A932789C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSchedule.UI", "SchoolSchedule.UI\SchoolSchedule.UI.csproj", "{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{FF3007B0-95F1-42D2-B48C-F44A932789C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF3007B0-95F1-42D2-B48C-F44A932789C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF3007B0-95F1-42D2-B48C-F44A932789C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
