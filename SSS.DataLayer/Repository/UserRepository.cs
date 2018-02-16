@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bogus;
 
 namespace SchoolSchedule.DataLayer.Repository
 {
@@ -67,6 +68,55 @@ namespace SchoolSchedule.DataLayer.Repository
                 System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
                 throw argEx;
             }
+        }
+        public async Task<List<User>> GetAllUsers()
+        {
+            try
+            {
+                var result = await _context.Users.ToListAsync();
+                
+                return result;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        }
+         
+        public async Task<bool> GenerateMockUsers(int totalRegisters)
+        {
+            try
+            {
+                for (int i = 0; i < totalRegisters; i++)
+                {
+                    var newUser = GenerateMockUser();
+                    _context.Users.Add(newUser);
+                }
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        }
+        public User GenerateMockUser()
+        {
+            var mockUser = new Faker<User>()
+                 .RuleFor(u => u.Id, f => Guid.NewGuid())
+                 .RuleFor(u => u.FirstName, f => f.Name.FirstName())
+                 .RuleFor(u => u.LastName, f => f.Name.LastName())
+                 .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.FirstName, u.LastName))
+                 .RuleFor(u => u.Created, f => DateTime.Now)
+                 .RuleFor(u => u.CurrentSemester, f => f.Random.Int(7))
+                 .RuleFor(u => u.IsGraduated, f => false)
+                 .RuleFor(u => u.IsExpelled, f => false)
+                 .RuleFor(u => u.Email, (f, u) => f.Internet.UserName(u.FirstName, u.LastName)+"@"+ f.Random.Word()+".com")
+                ;
+            return mockUser.Generate();
         }
 
     }

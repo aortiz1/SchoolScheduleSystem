@@ -12,5 +12,7 @@ namespace SchoolSchedule.DataLayer.Contracts
         Task<Guid> AddNewUser(User user);
         Task<bool> UpdateUserInformation(User user);
         Task<User> GetUserInformation(Guid? userId);
+        Task<List<User>> GetAllUsers();
+        Task<bool> GenerateMockUsers(int totalRegisters);
     }
 }

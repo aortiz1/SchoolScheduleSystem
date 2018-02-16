@@ -33,6 +33,13 @@ namespace SchoolSchedule.Service.Service
         {
             return await _userRepository.GetUserInformation(userId);
         }
-
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _userRepository.GetAllUsers();
+        }
+        public async Task<bool> GenerateMockUsers(int totalRegisters)
+        {
+            return await _userRepository.GenerateMockUsers(totalRegisters);
+        }
     }
 }

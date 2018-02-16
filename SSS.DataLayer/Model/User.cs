@@ -29,6 +29,8 @@ namespace SchoolSchedule.DataLayer.Model
         public Nullable<int> CurrentSemester { get; set; }
         public Nullable<bool> IsGraduated { get; set; }
         public Nullable<bool> IsExpelled { get; set; }
+        public string AspNetUserId { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserCourse> UserCourses { get; set; }

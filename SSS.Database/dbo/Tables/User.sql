@@ -8,5 +8,7 @@
     [Created] DATETIME NULL, 
     [CurrentSemester] INT NULL, 
     [IsGraduated] BIT NULL, 
-    [IsExpelled] BIT NULL
+    [IsExpelled] BIT NULL, 
+    [AspNetUserId] VARCHAR(MAX) NULL, 
+    [Email] VARCHAR(MAX) NULL
 )

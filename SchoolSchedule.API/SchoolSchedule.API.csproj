@@ -208,9 +208,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SchoolSchedule.Service\SchoolSchedule.Service.csproj">
+    <ProjectReference Include="..\SchoolSchedule.Service\SchoolSchedule.BusinessLayer.csproj">
       <Project>{dea36657-d7f8-43f7-a416-c9426ba8c77e}</Project>
-      <Name>SchoolSchedule.Service</Name>
+      <Name>SchoolSchedule.BusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\SSS.DataLayer\SchoolSchedule.DataLayer.csproj">
       <Project>{ea3853ef-3ba4-43c6-8c3b-bf7525964bda}</Project>

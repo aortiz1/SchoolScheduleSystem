@@ -12,5 +12,6 @@ namespace SchoolSchedule.Service.Contracts
         Task<Guid> AddNewUser(User user);
         Task<bool> UpdateUserInformation(User user);
         Task<User> GetUserInformation(Guid? userId);
+        Task<List<User>> GetAllUsers();
     }
 }

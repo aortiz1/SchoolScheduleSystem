@@ -18,7 +18,9 @@ namespace SchoolSchedule.API.Controllers
         {
             _userService = new UserService();
         }
+
         [Route("AddNewUser")]
+        [HttpPut]
         public async Task<IHttpActionResult> AddNewUser(User user)
         {
             Guid result = await _userService.AddNewUser(user);
