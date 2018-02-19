@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
+
 using SchoolSchedule.DataLayer.Model;
 using SchoolSchedule.Service.Contracts;
 using SchoolSchedule.Service.Service;
+using System.Web.Http;
 using System.Threading.Tasks;
 
 namespace SchoolSchedule.API.Controllers
@@ -23,8 +24,77 @@ namespace SchoolSchedule.API.Controllers
         [HttpPut]
         public async Task<IHttpActionResult> AddNewUser(User user)
         {
-            Guid result = await _userService.AddNewUser(user);
-            return Ok(result);
+            try {
+                Guid result = await _userService.AddNewUser(user);
+                return Ok(new { success= true, result = result});
+            }
+            catch(Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+            
         }
+
+        [Route("UpdateUserInformation")]
+        [HttpPost]
+        public async Task<IHttpActionResult> UpdateUserInformation([FromBody] User user)
+        {
+            try
+            {
+                var result = await _userService.UpdateUserInformation(user);
+                return Ok(new { success = true, result = "User Updated" });
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetUserInformation")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetUserInformation(Guid? userId)
+        {
+            try
+            {
+                var result = await _userService.GetUserInformation(userId);
+                return Ok(new { success = true, result = result });
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetAllUsers")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllUsers()
+        {
+            try
+            {
+                var result = await _userService.GetAllUsers();
+                return Ok(new { success = true, result = result });
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GenerateMockUsers")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GenerateMockUsers(int totalRegisters)
+        {
+            try
+            {
+                var result = await _userService.GenerateMockUsers(totalRegisters);
+                return Ok(new { success = true, result = result });
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }

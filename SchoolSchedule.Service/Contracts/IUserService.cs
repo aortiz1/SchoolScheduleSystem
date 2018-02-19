@@ -13,5 +13,6 @@ namespace SchoolSchedule.Service.Contracts
         Task<bool> UpdateUserInformation(User user);
         Task<User> GetUserInformation(Guid? userId);
         Task<List<User>> GetAllUsers();
+        Task<bool> GenerateMockUsers(int totalRegisters);
     }
 }
