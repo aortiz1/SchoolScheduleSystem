@@ -15,9 +15,12 @@ namespace SchoolSchedule.API
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+  //          GlobalConfiguration.Configuration
+  //.EnableSwagger(c => c.SingleApiVersion("v1", "School Schedule API"))
+  //.EnableSwaggerUi();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+          
         }
     }
 }
