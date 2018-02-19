@@ -184,6 +184,16 @@
     <Content Include="Scripts\dirPagination.tpl.html" />
     <Content Include="Scripts\loading-bar.js" />
     <Content Include="Scripts\loading-bar.min.js" />
+    <Content Include="Views\Common\Home\Home.html" />
+    <Content Include="Views\Common\Home\Home.js" />
+    <Content Include="Views\Common\Login\Login.html" />
+    <Content Include="Views\Common\Login\login.js" />
+    <Content Include="Views\Common\Register\Register.html" />
+    <Content Include="Views\Common\Register\Register.js" />
+    <Content Include="Views\User\EditUser\EditUser.js" />
+    <Content Include="Views\User\EditUser\EditUser.html" />
+    <Content Include="Views\User\UserDetails\UserDetails.html" />
+    <Content Include="Views\User\UserDetails\UserDetails.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
