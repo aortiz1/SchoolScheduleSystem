@@ -9,9 +9,11 @@ using SchoolSchedule.Service.Contracts;
 using SchoolSchedule.Service.Service;
 using System.Web.Http;
 using System.Threading.Tasks;
+using System.Web.Http.Cors;
 
 namespace SchoolSchedule.API.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class UserController : ApiController
     {
         private IUserService _userService;

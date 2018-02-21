@@ -105,13 +105,14 @@ namespace SchoolSchedule.DataLayer.Repository
         }
         public User GenerateMockUser()
         {
+            var semesters = new[] { 1, 2, 3, 4, 5, 6, 7 };
             var mockUser = new Faker<User>()
                  .RuleFor(u => u.Id, f => Guid.NewGuid())
                  .RuleFor(u => u.FirstName, f => f.Name.FirstName())
                  .RuleFor(u => u.LastName, f => f.Name.LastName())
                  .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.FirstName, u.LastName))
                  .RuleFor(u => u.Created, f => DateTime.Now)
-                 .RuleFor(u => u.CurrentSemester, f => f.Random.Int(7))
+                 .RuleFor(u => u.CurrentSemester, f => f.PickRandom(semesters))
                  .RuleFor(u => u.IsGraduated, f => false)
                  .RuleFor(u => u.IsExpelled, f => false)
                  .RuleFor(u => u.Email, (f, u) => f.Internet.UserName(u.FirstName, u.LastName)+"@"+ f.Random.Word()+".com")

@@ -16,18 +16,26 @@ using Microsoft.Owin.Security.OAuth;
 using SchoolSchedule.API.Models;
 using SchoolSchedule.API.Providers;
 using SchoolSchedule.API.Results;
+using SchoolSchedule.DataLayer.Model;
+using SchoolSchedule.Service.Contracts;
+using SchoolSchedule.Service.Service;
+using System.Text;
+using System.Web.Http.Cors;
 
 namespace SchoolSchedule.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
+    [EnableCors("*", "*", "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private IUserService _userService;
 
         public AccountController()
         {
+            _userService = new UserService();
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -72,6 +80,28 @@ namespace SchoolSchedule.API.Controllers
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
+        }
+        [Route("CreateUser")]
+        public async Task<IHttpActionResult> CreateUser(User user)
+        {
+            var passHash = CalculateHash(user.PasswordHash);
+            user.PasswordHash = passHash;
+            var appUser = new ApplicationUser { UserName = user.UserName, Email = user.Email, PasswordHash= passHash };
+            var resultCreate = await UserManager.CreateAsync(appUser);
+            if(resultCreate.Succeeded)
+            {
+                var resultUser = await _userService.AddNewUser(user);
+            }
+            return Ok();
+        }
+        public string CalculateHash(string input)
+        {
+            using (var algorithm = SHA512.Create()) //or MD5 SHA256 etc.
+            {
+                var hashedBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true

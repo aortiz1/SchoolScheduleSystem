@@ -190,6 +190,8 @@
     <Content Include="Views\Common\Login\login.js" />
     <Content Include="Views\Common\Register\Register.html" />
     <Content Include="Views\Common\Register\Register.js" />
+    <Content Include="Views\Management\UserManagement\UserManagement.html" />
+    <Content Include="Views\Management\UserManagement\UserManagement.js" />
     <Content Include="Views\User\EditUser\EditUser.js" />
     <Content Include="Views\User\EditUser\EditUser.html" />
     <Content Include="Views\User\UserDetails\UserDetails.html" />
