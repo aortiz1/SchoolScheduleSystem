@@ -115,7 +115,7 @@ namespace SchoolSchedule.DataLayer.Repository
                  .RuleFor(u => u.CurrentSemester, f => f.PickRandom(semesters))
                  .RuleFor(u => u.IsGraduated, f => false)
                  .RuleFor(u => u.IsExpelled, f => false)
-                 .RuleFor(u => u.Email, (f, u) => f.Internet.UserName(u.FirstName, u.LastName)+"@"+ f.Random.Word()+".com")
+                 .RuleFor(u => u.Email, (f, u) => f.Internet.UserName(u.FirstName, u.LastName)+"@"+ f.Random.Words(1)+".com")
                 ;
             return mockUser.Generate();
         }

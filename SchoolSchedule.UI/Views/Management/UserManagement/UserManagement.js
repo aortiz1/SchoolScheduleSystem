@@ -8,6 +8,16 @@
         });
         return users;
     };
+    userManagementObj.createNewUser = function (user) {
+        var newUser;
+        newUser = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/Register', data: user })
+        .then(function (response) {
+            return response.data
+        }, function (error) {
+            return error.data
+        });
+        return newUser;
+    };
     return userManagementObj;
 });
 
@@ -17,5 +27,12 @@ appSchoolSchedule.controller('userManagementController', function ($scope, userM
     userManagementService.getAll().then(function (results) {
         $scope.users = results;
     })
+
+    $scope.createNewUser = function (user) {
+        userManagementService.createNewUser(user).then(function (result) {
+            $scope.msg = "Profile created";
+        })
+      
+    }
 
 })

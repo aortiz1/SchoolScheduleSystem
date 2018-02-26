@@ -7,10 +7,13 @@
 <body>
     <form name="createUserForm">
         <div class="card" style="width: 20rem;">
-
+            
             <div class="card-block">
                 <div class="form-horizontal">
-                   
+                    <div class="form-group">
+                        <label for="emailTxt">Email address</label>
+                        <input type="email" class="form-control" id="emailTxt" ng-model="user.Email" placeholder="Enter email">
+                    </div>
                     <div class="form-group">
                         <label for="userNameTxt">Username</label>
                         <input type="text" class="form-control" id="userNameTxt" ng-model="user.UserName" placeholder="Choose your username">
@@ -27,11 +30,11 @@
                         <label for="lastNameTxt">Last name</label>
                         <input type="text" class="form-control" id="lastNameTxt" ng-model="user.LastName" placeholder="Enter last name">
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-6">
-                            <input type="submit" value="Create" ng-click="createNewUser(user)" />
-                        </div>
-                    </div>
+                     <div class="form-group">
+                         <div class="col-md-offset-2 col-md-6">
+                             <input type="submit" value="Create" ng-click="createNewUser(user)" />
+                         </div>
+                     </div>
                 </div>
 
             </div>

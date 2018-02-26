@@ -21,10 +21,14 @@ using SchoolSchedule.Service.Contracts;
 using SchoolSchedule.Service.Service;
 using System.Text;
 using System.Web.Http.Cors;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Web.Configuration;
+
 
 namespace SchoolSchedule.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/Account")]
     [EnableCors("*", "*", "*")]
     public class AccountController : ApiController
@@ -32,6 +36,8 @@ namespace SchoolSchedule.API.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private IUserService _userService;
+        //private  SignInManager<ApplicationUser> _signInManager;
+
 
         public AccountController()
         {
@@ -43,6 +49,7 @@ namespace SchoolSchedule.API.Controllers
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
+            _userService = new UserService();
         }
 
         public ApplicationUserManager UserManager
@@ -81,18 +88,60 @@ namespace SchoolSchedule.API.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
-        [Route("CreateUser")]
+
+        [Route("Login")]
+        public IHttpActionResult Login([FromBody] LoginViewModel login)
+        {
+          
+            var userLogin = awaitSignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+            var plainTextSecurityKey = Encoding.ASCII.GetBytes(WebConfigurationManager.AppSettings["PFUserName"]);
+            var signingKey = new SymmetricSecurityKey(plainTextSecurityKey);
+            var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+
+            var current = DateTime.Now;
+
+            var claims = new[] { new Claim(ClaimTypes.Role, "student"), new Claim(ClaimTypes.Name, "aortiz") };
+
+            var claimsIdentity = new ClaimsIdentity();
+            claimsIdentity.AddClaims(claims);
+
+            var securityTokenDescriptor = new SecurityTokenDescriptor
+            {
+                IssuedAt = current,
+                Issuer = "ScheduleIssuer",
+                Audience = "ScheduleAudience",
+                Expires = current.AddYears(1), //Change this to modify when the token is going to expire, read from appsettings.json file
+                SigningCredentials = signingCredentials,
+                NotBefore = current,
+                Subject = claimsIdentity
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
+            var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
+            return Ok(new { success= true, token = signedAndEncodedToken});
+        }
+        [Route("CreateNewUser")]
+        [HttpPost]
         public async Task<IHttpActionResult> CreateUser(User user)
         {
-            var passHash = CalculateHash(user.PasswordHash);
-            user.PasswordHash = passHash;
-            var appUser = new ApplicationUser { UserName = user.UserName, Email = user.Email, PasswordHash= passHash };
-            var resultCreate = await UserManager.CreateAsync(appUser);
-            if(resultCreate.Succeeded)
+            try
             {
-                var resultUser = await _userService.AddNewUser(user);
+                var passHash = CalculateHash(user.PasswordHash);
+                user.PasswordHash = passHash;
+                var appUser = new ApplicationUser { UserName = user.UserName, Email = user.Email, PasswordHash = passHash };
+                var resultCreate = await UserManager.CreateAsync(appUser);
+                if (resultCreate.Succeeded)
+                {
+                    var resultUser = await _userService.AddNewUser(user);
+                }
+                return Ok(resultCreate);
             }
-            return Ok();
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
         public string CalculateHash(string input)
         {
@@ -353,21 +402,32 @@ namespace SchoolSchedule.API.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                var SignInManager = new Microsoft.AspNet.Identity.Owin.SignInManager
+                await Microsoft.AspNet.Identity.Owin.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                
+                var userDB = new User();
+                if (result.Succeeded)
+                {
+                    userDB = new User() { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email };
+                    var resultUser = await _userService.AddNewUser(userDB);
+                }
+
+                return Ok(new { success = true, result = userDB.Id } );
             }
-
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            catch(Exception ex)
             {
-                return GetErrorResult(result);
+                return BadRequest("An error ocurred " + ex.Message);
             }
-
-            return Ok();
+         
         }
 
         // POST api/Account/RegisterExternal
