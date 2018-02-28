@@ -41,5 +41,14 @@ namespace SchoolSchedule.Service.Service
         {
             return await _userRepository.GenerateMockUsers(totalRegisters);
         }
+
+        public async Task<User> GetUserByName(string userName)
+        {
+            return await _userRepository.GetUserByName(userName);
+        }
+        public async Task<bool> SetRoleToUser(AspNetUserRole roleUser)
+        {
+            return await _userRepository.SetRoleToUser(roleUser);
+        }
     }
 }

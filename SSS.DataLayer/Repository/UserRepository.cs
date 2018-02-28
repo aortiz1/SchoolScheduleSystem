@@ -32,6 +32,24 @@ namespace SchoolSchedule.DataLayer.Repository
                 throw argEx;
             }
         }
+
+        public async Task<User> GetUserByName(string userName)
+        {
+            try
+            {
+                var result = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+                if(result == null)
+                {
+                    throw new Exception("The user does not exist");
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        } 
         public async Task<bool> UpdateUserInformation(User user)
         {
             try
@@ -76,6 +94,21 @@ namespace SchoolSchedule.DataLayer.Repository
                 var result = await _context.Users.ToListAsync();
                 
                 return result;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        }
+        public async Task<bool> SetRoleToUser(AspNetUserRole roleUser)
+        {
+            try
+            {
+                roleUser.Id = Guid.NewGuid();
+                _context.AspNetUserRoles.Add(roleUser);
+                await _context.SaveChangesAsync();
+                return true;
             }
             catch (Exception e)
             {

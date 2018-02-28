@@ -14,5 +14,7 @@ namespace SchoolSchedule.Service.Contracts
         Task<User> GetUserInformation(Guid? userId);
         Task<List<User>> GetAllUsers();
         Task<bool> GenerateMockUsers(int totalRegisters);
+        Task<User> GetUserByName(string userName);
+        Task<bool> SetRoleToUser(AspNetUserRole roleUser);
     }
 }

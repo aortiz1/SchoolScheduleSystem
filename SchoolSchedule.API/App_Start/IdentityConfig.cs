@@ -25,16 +25,21 @@ namespace SchoolSchedule.API
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
             };
-            // Configure validation logic for passwords
-            manager.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
-            };
-            var dataProtectionProvider = options.DataProtectionProvider;
+            //Configure validation logic for passwords
+
+           manager.PasswordValidator = new PasswordValidator
+           {
+               RequiredLength = 6,
+               RequireNonLetterOrDigit = false,
+               RequireDigit = false,
+               RequireLowercase = false,
+               RequireUppercase = false,
+               //RequireNonLetterOrDigit = true,
+               //RequireDigit = true,
+               //RequireLowercase = true,
+               //RequireUppercase = true,
+           };
+           var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));

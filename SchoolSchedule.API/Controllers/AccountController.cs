@@ -24,6 +24,7 @@ using System.Web.Http.Cors;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Web.Configuration;
+using System.Linq;
 
 
 namespace SchoolSchedule.API.Controllers
@@ -35,6 +36,7 @@ namespace SchoolSchedule.API.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private ApplicationSignInManager _signInManager;
         private IUserService _userService;
         //private  SignInManager<ApplicationUser> _signInManager;
 
@@ -64,6 +66,17 @@ namespace SchoolSchedule.API.Controllers
             }
         }
 
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? Request.GetOwinContext().GetUserManager<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         // GET api/Account/UserInfo
@@ -90,17 +103,19 @@ namespace SchoolSchedule.API.Controllers
         }
 
         [Route("Login")]
-        public IHttpActionResult Login([FromBody] LoginViewModel login)
+        public async  Task<IHttpActionResult> Login([FromBody] LoginViewModel login)
         {
-          
-            var userLogin = awaitSignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            var plainTextSecurityKey = Encoding.ASCII.GetBytes(WebConfigurationManager.AppSettings["PFUserName"]);
+
+
+            var userLogin = await _userService.GetUserByName(login.UserName);
+            var resultLogin = await SignInManager.PasswordSignInAsync(userLogin.Email, login.Password, false, false);
+            var plainTextSecurityKey = Encoding.ASCII.GetBytes(WebConfigurationManager.AppSettings["SecurityKey"]);
             var signingKey = new SymmetricSecurityKey(plainTextSecurityKey);
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-
+        
             var current = DateTime.Now;
 
-            var claims = new[] { new Claim(ClaimTypes.Role, "student"), new Claim(ClaimTypes.Name, "aortiz") };
+            var claims = new[] { new Claim(ClaimTypes.Role, "student"), new Claim(ClaimTypes.Name, login.UserName) };
 
             var claimsIdentity = new ClaimsIdentity();
             claimsIdentity.AddClaims(claims);
@@ -119,7 +134,8 @@ namespace SchoolSchedule.API.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
             var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
-            return Ok(new { success= true, token = signedAndEncodedToken});
+            return Ok(new { success = true, token = signedAndEncodedToken });
+
         }
         [Route("CreateNewUser")]
         [HttpPost]
@@ -139,7 +155,9 @@ namespace SchoolSchedule.API.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                //var modelState = new ModelStateDictionary();
+                //modelState.AddModelError()
+                return BadRequest();
             }
            
         }
@@ -398,34 +416,72 @@ namespace SchoolSchedule.API.Controllers
         }
 
         // POST api/Account/Register
+
         [AllowAnonymous]
-        [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        [Route("RegisterStudent")]
+        public async Task<IHttpActionResult> RegisterStudent(RegisterBindingModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
+                    var errors = ModelState
+                        .Where(x => x.Value.Errors.Count > 0)
+                        .Select(x => new { x.Key, x.Value.Errors })
+                        .ToArray();
                     return BadRequest(ModelState);
                 }
 
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                var SignInManager = new Microsoft.AspNet.Identity.Owin.SignInManager
-                await Microsoft.AspNet.Identity.Owin.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                //var SignInManager = new Microsoft.AspNet.Identity.Owin.SignInManager
+                //await Microsoft.AspNet.Identity.Owin.SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+            
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 
                 var userDB = new User();
                 if (result.Succeeded)
                 {
-                    userDB = new User() { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email };
-                    var resultUser = await _userService.AddNewUser(userDB);
-                }
+                    //AspNetUserRole userRole = new AspNetUserRole
+                    //{
+                    //    UserId = user.Id,
+                    //    RoleId = "9A68183E-3DE1-4FC7-A671-F809C5C6305E"
+                    //};
+                    //var resultSetRole = await _userService.SetRoleToUser(userRole);
 
-                return Ok(new { success = true, result = userDB.Id } );
+
+                    var roles = await UserManager.AddToRoleAsync(user.Id, "Student");
+                    if (roles.Succeeded)
+                    {
+                        userDB = new User() { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, AspNetUserId = user.Id };
+                        var resultUser = await _userService.AddNewUser(userDB);
+                    }
+                    else
+                    {
+                        var errors = "";
+                        foreach (var item in roles.Errors)
+                        {
+                            errors += "\n " + item;
+                        }
+                        throw new Exception(errors);
+                    }
+                }
+                else
+                {
+                    var errors = "";
+                    foreach (var item in result.Errors)
+                    {
+                        errors += "\n " + item;
+                    }
+                    throw new Exception(errors);
+                }
+                
+
+                return this.Ok(new { success = true, result = userDB.Id } );
             }
             catch(Exception ex)
             {
-                return BadRequest("An error ocurred " + ex.Message);
+                return BadRequest(ex.Message);
+                //return BadRequest("An error ocurred " + ex.Message);
             }
          
         }
