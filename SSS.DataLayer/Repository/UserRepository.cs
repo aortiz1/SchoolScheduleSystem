@@ -22,6 +22,10 @@ namespace SchoolSchedule.DataLayer.Repository
             try
             {
                 user.Id = Guid.NewGuid();
+                user.CurrentSemester = 1;
+                user.Created = DateTime.Now;
+                user.IsGraduated = false;
+                user.IsExpelled = false;
                 _context.Users.Add(user);
                 var operation = await _context.SaveChangesAsync();
                 return user.Id;
@@ -60,7 +64,8 @@ namespace SchoolSchedule.DataLayer.Repository
                     throw new Exception("Selected user not found on database");
                 }
                 _context.Entry(user).State = EntityState.Modified;
-                var operation = await _context.SaveChangesAsync();
+                _context.Entry(user).Member()
+              var operation = await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception e)

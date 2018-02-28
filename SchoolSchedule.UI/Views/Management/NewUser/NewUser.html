@@ -6,47 +6,49 @@
 </head>
 <body>
     <br />
-    <form name="createUserForm">
-        <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
-            <div class="card-header">Create your student account</div>
-            <div class="card-body">
-               
-                
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label for="emailTxt">Email address</label>
-                        <input type="email" class="form-control" id="emailTxt" ng-model="user.Email" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="userNameTxt">Username</label>
-                        <input type="text" class="form-control" id="userNameTxt" ng-model="user.UserName" placeholder="Choose your username">
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordTxt">Password</label>
-                        <input type="password" class="form-control" id="paswordTxt" ng-model="user.Password" placeholder="Enter password">
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordTxt">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPaswordTxt" ng-model="user.ConfirmPassword" placeholder="Enter password">
-                    </div>
-                    <div class="form-group">
-                        <label for="firstNameTxt">First name</label>
-                        <input type="text" class="form-control" id="firstNameTxt" ng-model="user.FirstName" placeholder="Enter first name">
-                    </div>
-                    <div class="form-group">
-                        <label for="lastNameTxt">Last name</label>
-                        <input type="text" class="form-control" id="lastNameTxt" ng-model="user.LastName" placeholder="Enter last name">
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-secondary" ng-click="createNewUser(user)">SIGN IN</button>
-                           
+    <div class="col-md-12">
+        <form name="createUserForm" style="max-width: 40rem;">
+            <div class="card text-white bg-primary" >
+                <div class="card-header">Create your student account</div>
+                <div class="card-body">
+
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="emailTxt">Email address</label>
+                            <input type="email" class="form-control" id="emailTxt" ng-model="user.Email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="userNameTxt">Username</label>
+                            <input type="text" class="form-control" id="userNameTxt" ng-model="user.UserName" placeholder="Choose your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordTxt">Password</label>
+                            <input type="password" class="form-control" id="paswordTxt" ng-model="user.Password" placeholder="Enter password">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordTxt">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPaswordTxt" ng-model="user.ConfirmPassword" placeholder="Enter password">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstNameTxt">First name</label>
+                            <input type="text" class="form-control" id="firstNameTxt" ng-model="user.FirstName" placeholder="Enter first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastNameTxt">Last name</label>
+                            <input type="text" class="form-control" id="lastNameTxt" ng-model="user.LastName" placeholder="Enter last name">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-secondary" ng-click="createNewUser(user)">SIGN IN</button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-       
-    </form>
+
+        </form>
+    </div>
 </body>
 </html>

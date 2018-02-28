@@ -10,5 +10,8 @@
     [IsGraduated] BIT NULL, 
     [IsExpelled] BIT NULL, 
     [AspNetUserId] VARCHAR(MAX) NULL, 
-    [Email] VARCHAR(MAX) NULL
+    [Email] VARCHAR(MAX) NULL, 
+    [Address] VARCHAR(MAX) NULL, 
+    [HomePhone] VARCHAR(50) NULL, 
+    [Cellphone] VARCHAR(50) NULL
 )
