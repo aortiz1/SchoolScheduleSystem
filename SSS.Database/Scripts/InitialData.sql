@@ -1,7 +1,11 @@
 ﻿
-INSERT [dbo].[AspNetRoles] ([Id],  [Name] ) VALUES (N'8B8ECA14-9BA2-4426-B8A4-605AFBC3AFCD', N'Teacher')
-INSERT [dbo].[AspNetRoles] ([Id], [Name] ) VALUES (N'9A68183E-3DE1-4FC7-A671-F809C5C6305E',  N'Student')
-INSERT [dbo].[AspNetRoles] ([Id],  [Name] ) VALUES (N'9B5A369C-8B88-4B92-8B9D-126FFFB0102A',  N'Admin')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'8B8ECA14-9BA2-4426-B8A4-605AFBC3AFCD', N'Teacher')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'9A68183E-3DE1-4FC7-A671-F809C5C6305E', N'Student')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'9B5A369C-8B88-4B92-8B9D-126FFFB0102A', N'Admin')
+GO
 
 --INSERT [dbo].[AspNetUserRoles] ([Id], [UserId], [RoleId]) VALUES (N'32cfdf1f-c73e-47d5-b406-c8d1f8b17436', N'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c', N'9B5A369C-8B88-4B92-8B9D-126FFFB0102A')
 

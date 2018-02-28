@@ -457,7 +457,8 @@ namespace SchoolSchedule.API.Controllers
                     }
                     else
                     {
-                        var errors = "";
+                        await UserManager.DeleteAsync(user);
+                       var errors = "";
                         foreach (var item in roles.Errors)
                         {
                             errors += "\n " + item;

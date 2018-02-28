@@ -1,1 +1,0 @@
-﻿:r .\InitialData.sql
