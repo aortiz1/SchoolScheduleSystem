@@ -1,9 +1,8 @@
 ﻿
-$("#menu-toggle").click(function (e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("active");
-});
-
+//$("#menu-toggle").click(function (e) {
+//    e.preventDefault();
+//    $("#wrapper").toggleClass("toggled");
+//});
 var appSchoolSchedule = angular.module('appSchoolSchedule', ['ngRoute']);
 
 appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
