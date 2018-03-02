@@ -34,3 +34,5 @@ SSS\.Database/SSS\.Database\.jfm
 /SchoolSchedule.API/SchoolSchedule.API.csproj.user
 /SchoolSchedule.API/Web.Debug.config
 /SchoolSchedule.API/Web.Release.config
+/SchoolSchedule.API.Tests/SchoolSchedule.API.Tests.csproj.user
+/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
