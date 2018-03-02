@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using SchoolSchedule.DataLayer.Contracts;
 
 namespace SchoolSchedule.DataLayer.Repository
 {
-    public class CoursesRepository
+    public class CoursesRepository: ICoursesRepository
     {
         private SchoolScheduleDBEntities _context;
 
@@ -34,6 +35,46 @@ namespace SchoolSchedule.DataLayer.Repository
             try
             {
                 var result = await _context.Degrees.ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        }
+
+        public async Task<bool> RegisterToCourse(Guid courseId, Guid studentId)
+        {
+            try
+            {
+                var semester = await (from u in _context.Users where u.Id == studentId select u.CurrentSemester).FirstOrDefaultAsync();
+                var newRegister = new UserCourse()
+                {
+                    Id = Guid.NewGuid(),
+                    Active = true,
+                    CourseId = courseId,
+                    UserId = studentId,
+                    Created = DateTime.Now,
+                    Semester = semester
+
+                };
+                _context.UserCourses.Add(newRegister);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        }
+        public async Task<List<UserCourse>> GetCoursesByStudent(Guid studentId, int semester)
+        {
+            try
+            {
+                var result = await _context.UserCourses.Where(x => x.Semester == semester && x.UserId == studentId).ToListAsync();
+           
                 return result;
             }
             catch (Exception e)

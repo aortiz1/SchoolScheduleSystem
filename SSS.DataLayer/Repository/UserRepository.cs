@@ -64,7 +64,7 @@ namespace SchoolSchedule.DataLayer.Repository
                     throw new Exception("Selected user not found on database");
                 }
                 _context.Entry(user).State = EntityState.Modified;
-                _context.Entry(user).Member()
+                //_context.Entry(user).Member()
               var operation = await _context.SaveChangesAsync();
                 return true;
             }
