@@ -10,3 +10,8 @@ SSS\.DataLayer/obj/Debug/SSS\.DataLayer\.csproj\.CoreCompileInputs\.cache
 
 SSS\.DataLayer/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3\.cs
 obj
+
+SSS\.DataLayer/bin/Debug/EntityFramework\.xml
+
+*.pdb
+bin
