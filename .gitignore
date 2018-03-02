@@ -31,3 +31,6 @@ SSS\.Database/ShoolSchedule\.Database\.sqlproj\.user
 SSS\.Database/Snapshots/ShoolSchedule\.Database_20180228_11-42-01\.dacpac
 
 SSS\.Database/SSS\.Database\.jfm
+/SchoolSchedule.API/SchoolSchedule.API.csproj.user
+/SchoolSchedule.API/Web.Debug.config
+/SchoolSchedule.API/Web.Release.config
