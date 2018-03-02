@@ -15,3 +15,19 @@ SSS\.DataLayer/bin/Debug/EntityFramework\.xml
 
 *.pdb
 bin
+
+SchoolSchedule\.UI/SchoolSchedule\.UI\.csproj\.user
+
+SchoolSchedule\.UI/Scripts/README\.md
+
+SchoolSchedule\.UI/Web\.Debug\.config
+
+SchoolSchedule\.UI/Web\.Release\.config
+
+SSS\.Database/ShoolSchedule\.Database\.jfm
+
+SSS\.Database/ShoolSchedule\.Database\.sqlproj\.user
+
+SSS\.Database/Snapshots/ShoolSchedule\.Database_20180228_11-42-01\.dacpac
+
+SSS\.Database/SSS\.Database\.jfm
