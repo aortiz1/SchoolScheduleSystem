@@ -19,6 +19,18 @@
         });
         return newUser;
     };
+    userManagementObj.login = function (user) {
+        var loginRequest;
+        loginRequest = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/Login', data: user })
+        .then(function (response) {
+            return response.data;
+        },
+        function (error) {
+            return error.data;
+        }
+        );
+        return loginRequest;
+    };
     return userManagementObj;
 });
 
@@ -36,5 +48,12 @@ appSchoolSchedule.controller('userManagementController', function ($scope, userM
         })
       
     }
+    $scope.login = function (user) {
+        userManagementService.login(user).then(function (result) {
+            $scope.loginData = result;
+            console.log(result);
+        })
+    }
+
 
 })

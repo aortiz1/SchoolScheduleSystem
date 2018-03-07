@@ -26,7 +26,7 @@ namespace SchoolSchedule.API.Controllers
         [HttpPut]
         public async Task<IHttpActionResult> AddNewUser(User user)
         {
-            try {
+            try {   
                 Guid result = await _userService.AddNewUser(user);
                 return Ok(new { success= true, result = result});
             }

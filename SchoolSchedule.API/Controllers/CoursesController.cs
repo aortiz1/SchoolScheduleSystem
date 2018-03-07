@@ -13,6 +13,7 @@ namespace SchoolSchedule.API.Controllers
 {
     [RoutePrefix("api/Account")]
     [EnableCors("*", "*", "*")]
+    [Authorize]
     public class CoursesController : ApiController
     {
         private ICoursesService _coursesService;
@@ -36,16 +37,52 @@ namespace SchoolSchedule.API.Controllers
             }
         }
 
-        [Route("GetCoursesByDegree")]
+        [Route("GetAllDegrees")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetCoursesByDegree(Guid degreeId)
+        public async Task<IHttpActionResult> GetAllDegrees()
         {
             try
             {
-                var result = await _coursesService.GetCoursesByDegree(degreeId);
+                var result = await _coursesService.GetAllDegrees();
                 return Ok(new { success = true, result = result });
             }
             catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+        [Route("RegisterToCourse")]
+        [HttpPost]
+        public async Task<IHttpActionResult> RegisterToCourse(Guid courseId, Guid studentId)
+        {
+            try
+            {
+                var query = await _coursesService.RegisterToCourse(courseId, studentId);
+                string message = "";
+                if (query)
+                    message = "Subscribed to course";
+                else
+                    message = "Couldn't subscribe to course";
+
+                return Ok(new { success = query, result = message });
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetCoursesByStudent")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetCoursesByStudent(Guid studentId, int semester)
+        {
+            try
+            {
+                var result = await _coursesService.GetCoursesByStudent(studentId, semester);
+
+                return Ok(new { success = true, result = result});
+            }
+            catch(Exception ex)
             {
                 return this.BadRequest(ex.Message);
             }
