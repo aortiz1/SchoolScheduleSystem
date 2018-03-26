@@ -101,43 +101,61 @@ namespace SchoolSchedule.API.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
-
+        [Route("TestAuth")]
+        public IHttpActionResult TestAuth()
+        {
+           
+            return Ok("It works");
+        }
+        //[OverrideAuthentication]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [AllowAnonymous]
-        [Route("Login")]
+        [Route("Login", Name = "Login")]
         public async  Task<IHttpActionResult> Login(LoginViewModel login)
         {
             try
             {
+               
+              
                 var userLogin = await _userService.GetUserByName(login.UserName);
                 var resultLogin = await SignInManager.PasswordSignInAsync(userLogin.Email, login.Password, false, false);
-                var plainTextSecurityKey = Encoding.ASCII.GetBytes(WebConfigurationManager.AppSettings["SecurityKey"]);
-                var signingKey = new SymmetricSecurityKey(plainTextSecurityKey);
-                var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-
-                var authUser = UserManager.FindByEmail(userLogin.Email);
-                var roleUser = authUser.Roles;
-                var current = DateTime.Now;
-
-                var claims = new[] { new Claim(ClaimTypes.Role, "Student"), new Claim(ClaimTypes.Name, login.UserName) };
-
-                var claimsIdentity = new ClaimsIdentity();
-                claimsIdentity.AddClaims(claims);
-
-                var securityTokenDescriptor = new SecurityTokenDescriptor
+                if(resultLogin == SignInStatus.Success)
                 {
-                    IssuedAt = current,
-                    Issuer = "ScheduleIssuer",
-                    Audience = "ScheduleAudience",
-                    Expires = current.AddYears(1), //Change this to modify when the token is going to expire, read from appsettings.json file
-                    SigningCredentials = signingCredentials,
-                    NotBefore = current,
-                    Subject = claimsIdentity
-                };
+                    var plainTextSecurityKey = Encoding.ASCII.GetBytes(WebConfigurationManager.AppSettings["SecurityKey"]);
+                    var signingKey = new SymmetricSecurityKey(plainTextSecurityKey);
+                    var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
-                var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
-                return Ok(new { success = true, token = signedAndEncodedToken });
+                    var authUser = UserManager.FindByEmail(userLogin.Email);
+                  
+                    var roleUser = authUser.Roles;
+                    var current = DateTime.Now;
+
+                    var claims = new[] { new Claim(ClaimTypes.Role, "Student"), new Claim(ClaimTypes.Name, login.UserName) };
+
+                    var claimsIdentity = new ClaimsIdentity();
+                    claimsIdentity.AddClaims(claims);
+
+                    var securityTokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        IssuedAt = current,
+                        Issuer = "ScheduleIssuer",
+                        Audience = "ScheduleAudience",
+                        Expires = current.AddYears(1), //Change this to modify when the token is going to expire, read from appsettings.json file
+                        SigningCredentials = signingCredentials,
+                        NotBefore = current,
+                        Subject = claimsIdentity
+                    };
+
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
+                    var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
+                    return Ok(new { success = true, token = signedAndEncodedToken });
+                }
+                else
+                {
+                    return BadRequest("Login Failed");
+                }
+              
             }
             catch(Exception ex)
             {
@@ -261,71 +279,71 @@ namespace SchoolSchedule.API.Controllers
         }
         #region from middleware
         // POST api/Account/AddExternalLogin
-        //[Route("AddExternalLogin")]
-        //public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [Route("AddExternalLogin")]
+        public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-        //    AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+            AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
 
-        //    if (ticket == null || ticket.Identity == null || (ticket.Properties != null
-        //        && ticket.Properties.ExpiresUtc.HasValue
-        //        && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
-        //    {
-        //        return BadRequest("External login failure.");
-        //    }
+            if (ticket == null || ticket.Identity == null || (ticket.Properties != null
+                && ticket.Properties.ExpiresUtc.HasValue
+                && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
+            {
+                return BadRequest("External login failure.");
+            }
 
-        //    ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
+            ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
 
-        //    if (externalData == null)
-        //    {
-        //        return BadRequest("The external login is already associated with an account.");
-        //    }
+            if (externalData == null)
+            {
+                return BadRequest("The external login is already associated with an account.");
+            }
 
-        //    IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
-        //        new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
+            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
+                new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
         // POST api/Account/RemoveLogin
-        //[Route("RemoveLogin")]
-        //public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [Route("RemoveLogin")]
+        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    IdentityResult result;
+            IdentityResult result;
 
-        //    if (model.LoginProvider == LocalLoginProvider)
-        //    {
-        //        result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
-        //    }
-        //    else
-        //    {
-        //        result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
-        //            new UserLoginInfo(model.LoginProvider, model.ProviderKey));
-        //    }
+            if (model.LoginProvider == LocalLoginProvider)
+            {
+                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
+            }
+            else
+            {
+                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
+                    new UserLoginInfo(model.LoginProvider, model.ProviderKey));
+            }
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
         // GET api/Account/ExternalLogin
         //[OverrideAuthentication]
@@ -366,8 +384,8 @@ namespace SchoolSchedule.API.Controllers
         //    {
         //        Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-        //         ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-        //            OAuthDefaults.AuthenticationType);
+        //        ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+        //           OAuthDefaults.AuthenticationType);
         //        ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
         //            CookieAuthenticationDefaults.AuthenticationType);
 
@@ -387,43 +405,43 @@ namespace SchoolSchedule.API.Controllers
         //// GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
         //[AllowAnonymous]
         //[Route("ExternalLogins")]
-        //public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
-        //{
-        //    IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
-        //    List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
+        public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
+        {
+            IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
+            List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
 
-        //    string state;
+            string state;
 
-        //    if (generateState)
-        //    {
-        //        const int strengthInBits = 256;
-        //        state = RandomOAuthStateGenerator.Generate(strengthInBits);
-        //    }
-        //    else
-        //    {
-        //        state = null;
-        //    }
+            if (generateState)
+            {
+                const int strengthInBits = 256;
+                state = RandomOAuthStateGenerator.Generate(strengthInBits);
+            }
+            else
+            {
+                state = null;
+            }
 
-        //    foreach (AuthenticationDescription description in descriptions)
-        //    {
-        //        ExternalLoginViewModel login = new ExternalLoginViewModel
-        //        {
-        //            Name = description.Caption,
-        //            Url = Url.Route("ExternalLogin", new
-        //            {
-        //                provider = description.AuthenticationType,
-        //                response_type = "token",
-        //                client_id = Startup.PublicClientId,
-        //                redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
-        //                state = state
-        //            }),
-        //            State = state
-        //        };
-        //        logins.Add(login);
-        //    }
+            foreach (AuthenticationDescription description in descriptions)
+            {
+                ExternalLoginViewModel login = new ExternalLoginViewModel
+                {
+                    Name = description.Caption,
+                    Url = Url.Route("ExternalLogin", new
+                    {
+                        provider = description.AuthenticationType,
+                        response_type = "token",
+                        client_id = Startup.PublicClientId,
+                        redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                        state = state
+                    }),
+                    State = state
+                };
+                logins.Add(login);
+            }
 
-        //    return logins;
-        //}
+            return logins;
+        }
 
         // POST api/Account/Register
         #endregion

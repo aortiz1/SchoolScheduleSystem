@@ -50,8 +50,8 @@ appSchoolSchedule.controller('userManagementController', function ($scope, userM
     }
     $scope.login = function (user) {
         userManagementService.login(user).then(function (result) {
-            $scope.loginData = result;
-            console.log(result);
+            $localStorage.token = result.token;
+           
         })
     }
 

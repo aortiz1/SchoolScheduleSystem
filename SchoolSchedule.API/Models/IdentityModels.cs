@@ -30,4 +30,11 @@ namespace SchoolSchedule.API.Models
             return new ApplicationDbContext();
         }
     }
+    public class AuthContext : IdentityDbContext<IdentityUser>
+    {
+        public AuthContext()
+            : base("DefaultConnection", throwIfV1Schema: false)
+        {
+        }
+    }
 }
