@@ -13,5 +13,7 @@
     [Email] VARCHAR(MAX) NULL, 
     [Address] VARCHAR(MAX) NULL, 
     [HomePhone] VARCHAR(50) NULL, 
-    [Cellphone] VARCHAR(50) NULL
+    [Cellphone] VARCHAR(50) NULL, 
+    [DegreeId] UNIQUEIDENTIFIER NULL, 
+    CONSTRAINT [FK_User_Degree] FOREIGN KEY ([DegreeId]) REFERENCES [Degree]([Id])
 )

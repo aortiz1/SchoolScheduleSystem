@@ -106,21 +106,21 @@ namespace SchoolSchedule.DataLayer.Repository
                 throw argEx;
             }
         }
-        public async Task<bool> SetRoleToUser(AspNetUserRole roleUser)
-        {
-            try
-            {
-                roleUser.Id = Guid.NewGuid();
-                _context.AspNetUserRoles.Add(roleUser);
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception e)
-            {
-                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
-                throw argEx;
-            }
-        }
+        //public async Task<bool> SetRoleToUser(AspNetUserRole roleUser)
+        //{
+        //    try
+        //    {
+        //        roleUser.Id = Guid.NewGuid();
+        //        _context.AspNetUserRoles.Add(roleUser);
+        //        await _context.SaveChangesAsync();
+        //        return true;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+        //        throw argEx;
+        //    }
+        //}
          
         public async Task<bool> GenerateMockUsers(int totalRegisters)
         {

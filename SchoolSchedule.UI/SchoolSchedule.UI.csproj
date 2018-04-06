@@ -176,6 +176,8 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Services\CoursesService.js" />
+    <Content Include="Scripts\Services\UserService.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -205,8 +207,10 @@
     <Content Include="Views\Common\Home\Home.js" />
     <Content Include="Views\Common\Login\Login.html" />
     <Content Include="Views\Common\Login\login.js" />
-    <Content Include="Views\Common\Register\Register.html" />
-    <Content Include="Views\Common\Register\Register.js" />
+    <Content Include="Views\Courses\AllCourses\AllCourses.html" />
+    <Content Include="Views\Courses\AllCourses\AllCourses.js" />
+    <Content Include="Views\Courses\SubscribeToCourse\SubscribeToCourse.html" />
+    <Content Include="Views\Courses\SubscribeToCourse\SubscribeToCourse.js" />
     <Content Include="Views\Management\NewUser\NewUser.html" />
     <Content Include="Views\Management\NewUser\NewUser.js" />
     <Content Include="Views\Management\UserManagement\UserManagement.html" />

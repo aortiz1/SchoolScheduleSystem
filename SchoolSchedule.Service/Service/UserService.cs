@@ -46,9 +46,9 @@ namespace SchoolSchedule.Service.Service
         {
             return await _userRepository.GetUserByName(userName);
         }
-        public async Task<bool> SetRoleToUser(AspNetUserRole roleUser)
-        {
-            return await _userRepository.SetRoleToUser(roleUser);
-        }
+        //public async Task<bool> SetRoleToUser(AspNetUserRole roleUser)
+        //{
+        //    return await _userRepository.SetRoleToUser(roleUser);
+        //}
     }
 }

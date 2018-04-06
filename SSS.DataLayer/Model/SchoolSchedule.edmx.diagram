@@ -14,17 +14,8 @@
         <AssociationConnector Association="SchoolScheduleDBModel.FK_Course_Degree" />
         <AssociationConnector Association="SchoolScheduleDBModel.FK_UserCourse_Course" />
         <AssociationConnector Association="SchoolScheduleDBModel.FK_UserCourse_User" />
-        <EntityTypeShape EntityType="SchoolScheduleDBModel.AspNetRoleClaim" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SchoolScheduleDBModel.AspNetUserClaim" Width="2.5" PointX="9.875" PointY="6.625" />
-        <EntityTypeShape EntityType="SchoolScheduleDBModel.AspNetUserLogin" Width="1.5" PointX="9.875" PointY="4" />
-        <EntityTypeShape EntityType="SchoolScheduleDBModel.AspNetUser" Width="1.5" PointX="7.625" PointY="4.375" />
-        <AssociationConnector Association="SchoolScheduleDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="SchoolScheduleDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <EntityTypeShape EntityType="SchoolScheduleDBModel.AspNetRole" Width="1.5" PointX="10.625" PointY="1.5" />
-        <EntityTypeShape EntityType="SchoolScheduleDBModel.AspNetUserRole" Width="1.5" PointX="12.875" PointY="3.375" />
-        <AssociationConnector Association="SchoolScheduleDBModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
-        <AssociationConnector Association="SchoolScheduleDBModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
-      </Diagram>
+        <AssociationConnector Association="SchoolScheduleDBModel.FK_User_Degree" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -31,8 +31,13 @@ namespace SchoolSchedule.DataLayer.Model
         public Nullable<bool> IsExpelled { get; set; }
         public string AspNetUserId { get; set; }
         public string Email { get; set; }
+        public string Address { get; set; }
+        public string HomePhone { get; set; }
+        public string Cellphone { get; set; }
+        public Nullable<System.Guid> DegreeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserCourse> UserCourses { get; set; }
+        public virtual Degree Degree { get; set; }
     }
 }

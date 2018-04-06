@@ -1,6 +1,6 @@
-﻿appSchoolSchedule.factory('userManagementService', function ($http) {
+﻿appSchoolSchedule.factory('coursesService', function ($http) {
     userManagementObj = {};
-    userManagementObj.getAll = function () {
+    userManagementObj.getAllCourses = function (degreeId) {
         var users;
         users = $http({ method: 'Get', url: 'http://localhost:55200/GetAllUsers' }).
         then(function (response) {
@@ -14,7 +14,6 @@
         .then(function (response) {
             return response.data
         }, function (error) {
-            window.alert('An error happened, please try later');
             console.log(error);
             return error.data
         });
@@ -25,7 +24,6 @@
         loginRequest = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/Login', data: user })
         .then(function (response) {
             return response.data;
-
         },
         function (error) {
             return error.data;
@@ -35,29 +33,3 @@
     };
     return userManagementObj;
 });
-
-appSchoolSchedule.controller('userManagementController', function ($scope, userManagementService) {
-    $scope.msg = 'User management';
-
-    userManagementService.getAll().then(function (results) {
-        $scope.users = results;
-    })
-
-    $scope.createNewUser = function (user) {
-        userManagementService.createNewUser(user).then(function (result) {
-            $scope.msg = "Profile created";
-            $scope.Id = result.Id;
-            console.log(result);
-        });
-      
-    }
-    $scope.login = function (user) {
-        userManagementService.login(user).then(function (result) {
-            $localStorage.token = result.token;
-            $scope.Id = result.Id;
-            $window.location.href = '/home.html';
-        });
-    }
-
-
-})

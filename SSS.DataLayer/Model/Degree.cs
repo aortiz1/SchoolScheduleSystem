@@ -18,6 +18,7 @@ namespace SchoolSchedule.DataLayer.Model
         public Degree()
         {
             this.Courses = new HashSet<Course>();
+            this.Users = new HashSet<User>();
         }
     
         public System.Guid Id { get; set; }
@@ -25,5 +26,7 @@ namespace SchoolSchedule.DataLayer.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course> Courses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }
