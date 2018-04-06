@@ -39,18 +39,11 @@
 appSchoolSchedule.controller('userManagementController', function ($scope, userManagementService) {
     $scope.msg = 'User management';
 
-    userManagementService.getAll().then(function (results) {
-        $scope.users = results;
-    })
+    //userManagementService.getAll().then(function (results) {
+    //    $scope.users = results;
+    //})
 
-    $scope.createNewUser = function (user) {
-        userManagementService.createNewUser(user).then(function (result) {
-            $scope.msg = "Profile created";
-            $scope.Id = result.Id;
-            console.log(result);
-        });
-      
-    }
+   
     $scope.login = function (user) {
         userManagementService.login(user).then(function (result) {
             $localStorage.token = result.token;
