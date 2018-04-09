@@ -13,7 +13,9 @@ using System.Web.Http.Cors;
 
 namespace SchoolSchedule.API.Controllers
 {
+    [Authorize]
     [EnableCors("*", "*", "*")]
+    [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
         private IUserService _userService;
@@ -52,6 +54,7 @@ namespace SchoolSchedule.API.Controllers
             }
         }
 
+        [AllowAnonymous]
         [Route("GetUserInformation")]
         [HttpGet]
         public async Task<IHttpActionResult> GetUserInformation(Guid? userId)

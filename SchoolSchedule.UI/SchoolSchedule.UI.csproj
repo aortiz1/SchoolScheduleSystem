@@ -178,6 +178,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Services\CoursesService.js" />
     <Content Include="Scripts\Services\UserService.js" />
+    <Content Include="Scripts\Services\UtilsService.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -247,7 +248,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54256</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54280/</IISUrl>
+          <IISUrl>http://localhost:54281/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

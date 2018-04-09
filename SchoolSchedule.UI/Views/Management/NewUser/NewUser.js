@@ -1,19 +1,25 @@
-﻿appSchoolSchedule.controller('registerUserController', function ($scope, $location , userManagementService) {
+﻿appSchoolSchedule.controller('registerUserController', function ($scope, $location, utilsService, userService) {
     $scope.msg = 'User management';
 
    
     $scope.createNewUser = function (user) {
-        userManagementService.createNewUser(user).then(function (result) {
-            if (result.success == true)
-            {
-                $scope.msg = "Profile created";
-                $scope.Id = result.Id;
-                $location.path('/Home');
-                console.log(result);
-            }
-           
-        });
+      
+        if (!utilsService.matchPasswords(user.Password, user.ConfirmPassword)) {
+            window.alert('Password values do not match');
+        }
+        else {
+            userService.createNewUser(user).then(function (result) {
 
+                if (result.success == true) {
+                    $scope.msg = "Profile created";
+                    $scope.userId = result.result;
+                    $location.path('/Home');
+                    console.log(result);
+                
+                }
+
+            });
+        }
     }
 
 })
