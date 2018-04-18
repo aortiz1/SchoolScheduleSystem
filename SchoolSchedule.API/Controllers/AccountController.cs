@@ -149,7 +149,7 @@ namespace SchoolSchedule.API.Controllers
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
                     var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
-                    return Ok(new { success = true, token = signedAndEncodedToken });
+                    return Ok(new { success = true,userId= userLogin.Id,  token = signedAndEncodedToken });
                 }
                 else
                 {

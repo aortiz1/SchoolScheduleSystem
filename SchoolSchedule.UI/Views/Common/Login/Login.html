@@ -13,15 +13,15 @@
                    
                     <div class="form-group">
                         <label for="userNameTxt">Username</label>
-                        <input type="text" class="form-control" id="userNameTxt" ng-model="user.UserName" >
+                        <input type="text" class="form-control" id="userNameTxt" ng-model="userLogin.UserName" >
                     </div>
                     <div class="form-group">
                         <label for="passwordTxt">Password</label>
-                        <input type="password" class="form-control" id="passwordLoginTxt" ng-model="user.Password" >
+                        <input type="password" class="form-control" id="passwordLoginTxt" ng-model="userLogin.Password" >
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-6">
-                            <input type="submit" value="Log In" ng-click="login(user)" />
+                            <input type="submit" value="Log In" ng-click="login(userLogin)" />
                         </div>
                     </div>
                 </div>

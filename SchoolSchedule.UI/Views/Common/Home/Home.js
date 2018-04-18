@@ -3,11 +3,12 @@
     if (userService.userId != "")
     {
         console.log("logged");
+        console.log("userid", userService.userId);
         userService.getUserProfile(userService.userId).then(function (result) {
             if (result.success == true) {
                 console.log(result);
             
-                $scope.msg = 'Welcome to home page, ' + userService.profile.FistName;
+                $scope.msg = 'Welcome to home page, ' + userService.profile.firstName;
             }
 
         });

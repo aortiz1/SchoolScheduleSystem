@@ -1,26 +1,18 @@
-﻿appSchoolSchedule.factory('loginService', function ($http) {
-    loginObj = {};
-    loginObj.login = function (user) {
-        var loginRequest = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/Login' })
-        .then(function (response) {
-            return response.data;
-        }, function (error) {
-            console.log(error);
-            return error.data;
-        });
-        return loginRequest;
-    };
+﻿
+appSchoolSchedule.controller('loginController', function ($scope, $location, userService) {
+    $scope.msg = 'User management';
 
-    return loginObj;
-});
-
-appSchoolSchedule.controller('loginController', function ($scope, userManagementService) {
-
-    $scope.login = function (user) {
-        userManagementService.login(user).then(function (result) {
-            $localStorage.token = result.token;
-            $scope.userId = result.Id;
-            $window.location.href = '/home.html';
+    $scope.login = function (userLogin) {
+        console.log('user', userLogin);
+        userService.login(userLogin).then(function (result) {
+            if (result.success == true) {
+                $scope.token = result.token;
+                $scope.userId = result.Id;
+                $location.path('/Home');
+            }
+            else {
+                window.alert("User not found");
+            }
         });
     }
 

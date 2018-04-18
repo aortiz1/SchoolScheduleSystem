@@ -17,6 +17,7 @@
         var newUser;
         newUser = $http({ method: 'Get', url: 'http://localhost:55200/api/User/GetUserInformation?userId='+ userId})
         .then(function (response) {
+            //console.log("data", response.data.result);
             userServiceObj.profile = response.data.result;
             return response.data
 
@@ -42,6 +43,19 @@
             return error.data
         });
         return newUser;
+    };
+
+    userServiceObj.login = function (user) {
+        var loginRequest = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/Login', data: user })
+        .then(function (response) {
+            console.log("data", response);
+            userServiceObj.userId = response.data.userId;
+            return response.data;
+        }, function (error) {
+            console.log("login error",error);
+            return error.data;
+        });
+        return loginRequest;
     };
    
   
