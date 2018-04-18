@@ -1,7 +1,7 @@
 ﻿appSchoolSchedule.factory('userService', function ($http) {
     userServiceObj = {};
     userServiceObj.profile = {};
-    userServiceObj.userId = {};
+    userServiceObj.userId = "";
     userServiceObj.editUser = function (user) {
         var result;
         result = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/UpdateUserInformation', data: user }).
@@ -43,6 +43,7 @@
         });
         return newUser;
     };
+   
   
     return userServiceObj;
 });

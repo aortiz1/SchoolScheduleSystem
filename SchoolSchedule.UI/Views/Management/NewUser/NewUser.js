@@ -1,4 +1,4 @@
-﻿appSchoolSchedule.controller('registerUserController', function ($scope, $location, utilsService, userService) {
+﻿appSchoolSchedule.controller('registerUserController', function ($scope, $cookies, $rootScope, $location, utilsService, userService) {
     $scope.msg = 'User management';
 
    
@@ -11,6 +11,7 @@
             userService.createNewUser(user).then(function (result) {
 
                 if (result.success == true) {
+                    $cookies.put("Auth", "true");
                     $scope.msg = "Profile created";
                     $scope.userId = result.result;
                     $location.path('/Home');

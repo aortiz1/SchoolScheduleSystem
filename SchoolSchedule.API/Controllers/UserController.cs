@@ -72,6 +72,7 @@ namespace SchoolSchedule.API.Controllers
 
         [Route("GetAllUsers")]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GetAllUsers()
         {
             try
@@ -87,6 +88,7 @@ namespace SchoolSchedule.API.Controllers
 
         [Route("GenerateMockUsers")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GenerateMockUsers(int totalRegisters)
         {
             try

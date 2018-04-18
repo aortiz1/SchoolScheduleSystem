@@ -1,6 +1,6 @@
 ﻿appSchoolSchedule.controller('homeController', function ($scope, userService) {
     $scope.msg = 'Welcome to home page';
-    if (userService.userId != null)
+    if (userService.userId != "")
     {
         console.log("logged");
         userService.getUserProfile(userService.userId).then(function (result) {

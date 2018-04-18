@@ -4,7 +4,7 @@
 //    e.preventDefault();
 //    $("#wrapper").toggleClass("toggled");
 //});
-var appSchoolSchedule = angular.module('appSchoolSchedule', ['ngRoute']);
+var appSchoolSchedule = angular.module('appSchoolSchedule', ['ngRoute', 'ngCookies']);
 
 appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
     $routeProvider.when('/Home', { templateUrl: 'Views/Common/Home/Home.html', controller: 'homeController' });

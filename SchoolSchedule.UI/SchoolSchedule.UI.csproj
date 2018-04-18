@@ -165,6 +165,7 @@
     <Content Include="fonts\open-iconic.otf" />
     <Content Include="fonts\open-iconic.ttf" />
     <Content Include="fonts\open-iconic.woff" />
+    <Content Include="scss\custom.scss" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
