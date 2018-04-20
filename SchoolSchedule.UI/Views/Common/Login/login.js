@@ -5,7 +5,7 @@ appSchoolSchedule.controller('loginController', function ($scope, $location, use
     $scope.login = function (userLogin) {
         console.log('user', userLogin);
         userService.login(userLogin).then(function (result) {
-            if (result.success == true) {
+            if (result.access_token != undefined) {
                 $scope.token = result.token;
                 $scope.userId = result.Id;
                 $location.path('/Home');

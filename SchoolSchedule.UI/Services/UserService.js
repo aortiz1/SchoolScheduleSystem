@@ -46,7 +46,14 @@
     };
 
     userServiceObj.login = function (user) {
-        var loginRequest = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/Login', data: user })
+      
+        var loginRequest = $http({
+            method: 'Post',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            url: 'http://localhost:55200/Token',
+            //data: user
+            data: $.param({  grant_type: 'password', username: user.username, password: user.password }),
+        })
         .then(function (response) {
             console.log("data", response);
             userServiceObj.userId = response.data.userId;

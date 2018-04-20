@@ -54,7 +54,7 @@ namespace SchoolSchedule.API.Controllers
             }
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [Route("GetUserInformation")]
         [HttpGet]
         public async Task<IHttpActionResult> GetUserInformation(Guid? userId)

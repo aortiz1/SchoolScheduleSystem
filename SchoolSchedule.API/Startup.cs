@@ -13,29 +13,9 @@ namespace SchoolSchedule.API
     {
         public void Configuration(IAppBuilder app)
         {
-            HttpConfiguration config = new HttpConfiguration();
-            ConfigureAuth(app);
-            WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-            app.UseWebApi(config);
-
+            ConfigureAuth(app);
         }
-        //public void ConfigureOAuth(IAppBuilder app)
-        //{
-
-        //    OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
-        //    {
-        //        //For Dev enviroment only (on production should be AllowInsecureHttp = false)
-        //        AllowInsecureHttp = true,
-        //        TokenEndpointPath = new PathString("/token"),
-        //        AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
-        //        Provider = new ApplicationOAuthProvider(),
-        //        AccessTokenFormat = new CustomJwtFormat("http://jwtauthzsrv.azurewebsites.net")
-        //    };
-
-        //    // OAuth 2.0 Bearer Access Token Generation
-        //    app.UseOAuthAuthorizationServer(OAuthServerOptions);
-
-        //}
+        
     }
 }
