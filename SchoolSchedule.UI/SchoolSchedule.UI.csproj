@@ -177,9 +177,9 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\Services\CoursesService.js" />
-    <Content Include="Scripts\Services\UserService.js" />
-    <Content Include="Scripts\Services\UtilsService.js" />
+    <Content Include="Services\CoursesService.js" />
+    <Content Include="Services\UserService.js" />
+    <Content Include="Services\UtilsService.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
