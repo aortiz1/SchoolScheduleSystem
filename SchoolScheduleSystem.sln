@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSchedule.DataLayer", "SSS.DataLayer\SchoolSchedule.DataLayer.csproj", "{EA3853EF-3BA4-43C6-8C3B-BF7525964BDA}"
 EndProject
@@ -14,6 +14,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSchedule.API.Tests", "SchoolSchedule.API.Tests\SchoolSchedule.API.Tests.csproj", "{FF3007B0-95F1-42D2-B48C-F44A932789C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSchedule.UI", "SchoolSchedule.UI\SchoolSchedule.UI.csproj", "{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolSystem.Datalayer", "SchoolSystem.Datalayer\SchoolSystem.Datalayer.csproj", "{A1E54062-F816-4F33-AC48-402DA06A86EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.API", "SchoolSystem.API\SchoolSystem.API.csproj", "{2E1EF292-3A1C-40B2-B86A-02B276D3AFD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.BusinessLayer", "SchoolSystem.BusinessLayer\SchoolSystem.BusinessLayer.csproj", "{F6B8B664-CCF3-4A37-9480-AA91545BA795}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +53,18 @@ Global
 		{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A69154B-F2DF-482C-B8BB-A2A6D22BC38B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E54062-F816-4F33-AC48-402DA06A86EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E54062-F816-4F33-AC48-402DA06A86EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E54062-F816-4F33-AC48-402DA06A86EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E54062-F816-4F33-AC48-402DA06A86EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E1EF292-3A1C-40B2-B86A-02B276D3AFD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E1EF292-3A1C-40B2-B86A-02B276D3AFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E1EF292-3A1C-40B2-B86A-02B276D3AFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E1EF292-3A1C-40B2-B86A-02B276D3AFD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6B8B664-CCF3-4A37-9480-AA91545BA795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B8B664-CCF3-4A37-9480-AA91545BA795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B8B664-CCF3-4A37-9480-AA91545BA795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B8B664-CCF3-4A37-9480-AA91545BA795}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
