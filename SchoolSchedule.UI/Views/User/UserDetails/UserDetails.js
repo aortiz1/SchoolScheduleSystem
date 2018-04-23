@@ -1,7 +1,11 @@
-﻿appSchoolSchedule.controller('userDetailsController', function ($scope, userService) {
+﻿/// <reference path="C:\archivos\SchoolScheduleProject\SchoolScheduleSystem\SchoolSchedule.UI\Services/UserService.js" />
+
+
+appSchoolSchedule.controller('userDetailsController', function ($scope, userService) {
     $scope.msg = 'Profile Information';
     if(userService.userId!="")
     {
+
         userService.getUserProfile(userService.userId).then(function (result) {
 
             if (result.success == true) {

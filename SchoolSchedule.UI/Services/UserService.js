@@ -1,4 +1,4 @@
-﻿appSchoolSchedule.factory('userService', function ($http) {
+﻿appSchoolSchedule.factory('userService', function ($http, $localStorage) {
     userServiceObj = {};
     userServiceObj.profile = {};
     userServiceObj.userId = "";
@@ -15,7 +15,14 @@
     };
     userServiceObj.getUserProfile = function (userId) {
         var newUser;
-        newUser = $http({ method: 'Get', url: 'http://localhost:55200/api/User/GetUserInformation?userId='+ userId})
+        newUser = $http({
+            method: 'Get',
+            url: 'http://localhost:55200/api/User/GetUserInformation?userId=' + userId,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + $localStorage.token
+            }
+        })
         .then(function (response) {
             //console.log("data", response.data.result);
             userServiceObj.profile = response.data.result;
