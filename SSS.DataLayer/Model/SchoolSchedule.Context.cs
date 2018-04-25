@@ -31,5 +31,6 @@ namespace SchoolSchedule.DataLayer.Model
         public virtual DbSet<CourseStatu> CourseStatus { get; set; }
         public virtual DbSet<Degree> Degrees { get; set; }
         public virtual DbSet<UserCourse> UserCourses { get; set; }
+        public virtual DbSet<UserProfileView> UserProfileViews { get; set; }
     }
 }

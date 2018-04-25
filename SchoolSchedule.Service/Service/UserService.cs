@@ -50,5 +50,10 @@ namespace SchoolSchedule.Service.Service
         //{
         //    return await _userRepository.SetRoleToUser(roleUser);
         //}
+
+        public async Task<UserProfileView> GetUserByEmail(string email)
+        {
+            return await _userRepository.GetUserByEmail(email);
+        }
     }
 }

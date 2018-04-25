@@ -16,5 +16,7 @@ namespace SchoolSchedule.DataLayer.Contracts
         Task<bool> GenerateMockUsers(int totalRegisters);
         Task<User> GetUserByName(string userName);
         //Task<bool> SetRoleToUser(AspNetUserRol roleUser);
+
+        Task<UserProfileView> GetUserByEmail(string email);
     }
 }

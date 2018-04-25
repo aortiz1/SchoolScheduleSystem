@@ -68,6 +68,29 @@
           <Property Name="UserId" Type="uniqueidentifier" />
           <Property Name="Semester" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserProfileView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="varchar(max)" />
+          <Property Name="FirstName" Type="varchar(max)" />
+          <Property Name="LastName" Type="varchar(max)" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="CurrentSemester" Type="int" />
+          <Property Name="IsGraduated" Type="bit" />
+          <Property Name="IsExpelled" Type="bit" />
+          <Property Name="AspNetUserId" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="HomePhone" Type="varchar" MaxLength="50" />
+          <Property Name="Cellphone" Type="varchar" MaxLength="50" />
+          <Property Name="DegreeId" Type="uniqueidentifier" />
+          <Property Name="Role" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Course_Degree">
           <End Role="Degree" Type="Self.Degree" Multiplicity="0..1" />
           <End Role="Course" Type="Self.Course" Multiplicity="*" />
@@ -123,6 +146,25 @@
           <EntitySet Name="SchoolRole" EntityType="Self.SchoolRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCourse" EntityType="Self.UserCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfileView" EntityType="Self.UserProfileView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserProfileView].[Id] AS [Id], 
+    [UserProfileView].[UserName] AS [UserName], 
+    [UserProfileView].[FirstName] AS [FirstName], 
+    [UserProfileView].[LastName] AS [LastName], 
+    [UserProfileView].[Created] AS [Created], 
+    [UserProfileView].[CurrentSemester] AS [CurrentSemester], 
+    [UserProfileView].[IsGraduated] AS [IsGraduated], 
+    [UserProfileView].[IsExpelled] AS [IsExpelled], 
+    [UserProfileView].[AspNetUserId] AS [AspNetUserId], 
+    [UserProfileView].[Email] AS [Email], 
+    [UserProfileView].[Address] AS [Address], 
+    [UserProfileView].[HomePhone] AS [HomePhone], 
+    [UserProfileView].[Cellphone] AS [Cellphone], 
+    [UserProfileView].[DegreeId] AS [DegreeId], 
+    [UserProfileView].[Role] AS [Role]
+    FROM [dbo].[UserProfileView] AS [UserProfileView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Course_Degree" Association="Self.FK_Course_Degree">
             <End Role="Degree" EntitySet="Degree" />
             <End Role="Course" EntitySet="Course" />
@@ -208,6 +250,7 @@
             <End Role="Degree" EntitySet="Degrees" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="UserProfileViews" EntityType="SchoolScheduleDBModel.UserProfileView" />
           </EntityContainer>
         <EntityType Name="CourseStatu">
           <Key>
@@ -287,6 +330,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserProfileView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="CurrentSemester" Type="Int32" />
+          <Property Name="IsGraduated" Type="Boolean" />
+          <Property Name="IsExpelled" Type="Boolean" />
+          <Property Name="AspNetUserId" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HomePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cellphone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DegreeId" Type="Guid" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -358,6 +422,27 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfileViews">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.UserProfileView">
+              <MappingFragment StoreEntitySet="UserProfileView">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+                <ScalarProperty Name="IsExpelled" ColumnName="IsExpelled" />
+                <ScalarProperty Name="IsGraduated" ColumnName="IsGraduated" />
+                <ScalarProperty Name="CurrentSemester" ColumnName="CurrentSemester" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -9,13 +9,12 @@ GO
 
 
 
---INSERT [dbo].[AspNetUserRoles] ([Id], [UserId], [RoleId]) VALUES (N'32cfdf1f-c73e-47d5-b406-c8d1f8b17436', N'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c', N'9B5A369C-8B88-4B92-8B9D-126FFFB0102A')
-
---INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName]) VALUES (N'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c', 0, N'cf8f2a27-701f-41d6-b911-b0511931d4c6', N'aortiz@sciodev.com', 0, 1, NULL, N'AORTIZ@SCIODEV.COM', N'AORTIZ', N'AQAAAAEAACcQAAAAECCRtmpCnVJsVn+/StNMhzDG4X9M4G1r3k5nTjRqnsza7GsmrAQmmJ0Hh8QxKKOAMg==', NULL, 0, N'1899e245-1206-4bdb-9243-27b18e0c4ada', 0, N'aortiz')
-
---INSERT INTO [dbo].[User]   ([Id]   ,[UserName],[FirstName],[LastName],[Created],[CurrentSemester],[IsGraduated],[IsExpelled],[AspNetUserId],[Email]) VALUES('b898cb00-be75-45c2-b543-b04ce2b9e1af','aortiz','Armando','Ortiz',CURRENT_TIMESTAMP,1,1,0,'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c','aortiz@sciodev.com')
 
 INSERT [dbo].[Degree] ([Id], [Description]) VALUES (N'eee2e521-c08b-4081-8258-fdd9246a0eae', N'Computer Science Engeneering')
+
+
+
+
 
 
 INSERT INTO [dbo].[Course]  ([Id] ,[Description] ,[MinimunSemesterAllowed] ,[PreviousCourseId],[DegreeId])   VALUES  (N'40a6550e-d314-45d0-830b-97aa7c274ae9'  ,N'Operative Systems I' ,null ,null ,N'eee2e521-c08b-4081-8258-fdd9246a0eae')
@@ -46,3 +45,22 @@ INSERT INTO [dbo].[Course]  ([Id] ,[Description] ,[MinimunSemesterAllowed] ,[Pre
 INSERT INTO [dbo].[Course]  ([Id] ,[Description] ,[MinimunSemesterAllowed] ,[PreviousCourseId],[DegreeId])   VALUES  (N'620221d2-9757-4e97-826f-78037eecbec3'  ,N'Administration' ,null ,null ,N'eee2e521-c08b-4081-8258-fdd9246a0eae')
 INSERT INTO [dbo].[Course]  ([Id] ,[Description] ,[MinimunSemesterAllowed] ,[PreviousCourseId],[DegreeId])   VALUES  (N'31bb87d7-a818-4604-a096-299cd6909920'  ,N'Web Applications I' ,null ,null ,N'eee2e521-c08b-4081-8258-fdd9246a0eae')
 INSERT INTO [dbo].[Course]  ([Id] ,[Description] ,[MinimunSemesterAllowed] ,[PreviousCourseId],[DegreeId])   VALUES  (N'0381d959-45e4-4f80-9233-8f21ad5fe18b'  ,N'Web Applications II' ,null ,null ,N'eee2e521-c08b-4081-8258-fdd9246a0eae')
+
+
+
+INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]) VALUES (N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'testy@mail.com', 0, N'AAP+F0yvVndCLgesgMIMQ/kbrLBD2LQYaVkmEh3gSY8mAdoSMtx1At2AY8M91OHFSA==', N'32cfef2b-9d3f-40a5-a2f5-b4db0a6d1dec', NULL, 0, 0, NULL, 0, 0, N'testy@mail.com')
+
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'9A68183E-3DE1-4FC7-A671-F809C5C6305E')
+
+INSERT [dbo].[User] ([Id], [UserName], [FirstName], [LastName], [PasswordHash], [Created], [CurrentSemester], [IsGraduated], [IsExpelled], [AspNetUserId], [Email], [Address], [HomePhone], [Cellphone], [DegreeId]) VALUES (N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', N'testy', N'Testy', N'User', NULL, CAST(N'2018-04-18 11:08:39.267' AS DateTime), 1, 0, 0, N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'testy@mail.com', NULL, NULL, NULL, NULL)
+
+
+
+
+--INSERT [dbo].[AspNetUserRoles] ([Id], [UserId], [RoleId]) VALUES (N'32cfdf1f-c73e-47d5-b406-c8d1f8b17436', N'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c', N'9B5A369C-8B88-4B92-8B9D-126FFFB0102A')
+
+--INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName]) VALUES (N'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c', 0, N'cf8f2a27-701f-41d6-b911-b0511931d4c6', N'aortiz@sciodev.com', 0, 1, NULL, N'AORTIZ@SCIODEV.COM', N'AORTIZ', N'AQAAAAEAACcQAAAAECCRtmpCnVJsVn+/StNMhzDG4X9M4G1r3k5nTjRqnsza7GsmrAQmmJ0Hh8QxKKOAMg==', NULL, 0, N'1899e245-1206-4bdb-9243-27b18e0c4ada', 0, N'aortiz')
+
+--INSERT INTO [dbo].[User]   ([Id]   ,[UserName],[FirstName],[LastName],[Created],[CurrentSemester],[IsGraduated],[IsExpelled],[AspNetUserId],[Email]) VALUES('b898cb00-be75-45c2-b543-b04ce2b9e1af','aortiz','Armando','Ortiz',CURRENT_TIMESTAMP,1,1,0,'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c','aortiz@sciodev.com')
+
+

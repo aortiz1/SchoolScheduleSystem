@@ -14,13 +14,15 @@ namespace SchoolSchedule.API
     {
         public static void Register(HttpConfiguration config)
         {
-            var cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
+
+
+           
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
+            //config.EnableCors(new EnableCorsAttribute("http://localhost:54281", "", ""));
+            config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
 
