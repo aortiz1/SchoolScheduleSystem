@@ -10,11 +10,11 @@ using SchoolSchedule.Service.Service;
 using System.Web.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
+using System.Security.Claims;
 
 namespace SchoolSchedule.API.Controllers
 {
     [Authorize]
-    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
@@ -62,6 +62,25 @@ namespace SchoolSchedule.API.Controllers
             try
             {
                 var result = await _userService.GetUserInformation(userId);
+                return Ok(new { success = true, result = result });
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetUserLoggedInformation")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetUserLoggedInformation()
+        {
+            try
+            {
+                var user = (ClaimsIdentity)User.Identity;
+                var claims = user.Claims;
+                var email = (from u in user.Claims where u.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" select u.Value).FirstOrDefault();
+
+                var result = await _userService.GetUserByEmail(email);
                 return Ok(new { success = true, result = result });
             }
             catch (Exception ex)

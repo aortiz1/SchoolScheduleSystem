@@ -92,6 +92,25 @@ namespace SchoolSchedule.DataLayer.Repository
                 throw argEx;
             }
         }
+
+        public async Task<UserProfileView> GetUserByEmail(string email)
+        {
+            try
+            {
+                var existingUser = await _context.UserProfileViews.Where(x => x.Email == email).FirstOrDefaultAsync();
+                if (existingUser == null)
+                {
+                    throw new Exception("Selected user not found on database");
+                }
+                return existingUser;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        }
+
         public async Task<List<User>> GetAllUsers()
         {
             try

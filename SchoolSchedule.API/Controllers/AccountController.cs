@@ -31,7 +31,6 @@ namespace SchoolSchedule.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
-    [EnableCors("*", "*", "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -107,6 +106,8 @@ namespace SchoolSchedule.API.Controllers
            
             return Ok("It works");
         }
+
+       
         //[OverrideAuthentication]
         //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [AllowAnonymous]
@@ -115,8 +116,6 @@ namespace SchoolSchedule.API.Controllers
         {
             try
             {
-               
-              
                 var userLogin = await _userService.GetUserByName(login.UserName);
                 var resultLogin = await SignInManager.PasswordSignInAsync(userLogin.Email, login.Password, false, false);
                 if(resultLogin == SignInStatus.Success)
@@ -128,28 +127,8 @@ namespace SchoolSchedule.API.Controllers
                     var authUser = UserManager.FindByEmail(userLogin.Email);
                   
                     var roleUser = authUser.Roles;
-                    var current = DateTime.Now;
-
-                    var claims = new[] { new Claim(ClaimTypes.Role, "Student"), new Claim(ClaimTypes.Name, login.UserName) };
-
-                    var claimsIdentity = new ClaimsIdentity();
-                    claimsIdentity.AddClaims(claims);
-
-                    var securityTokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        IssuedAt = current,
-                        Issuer = "ScheduleIssuer",
-                        Audience = "ScheduleAudience",
-                        Expires = current.AddYears(1), //Change this to modify when the token is going to expire, read from appsettings.json file
-                        SigningCredentials = signingCredentials,
-                        NotBefore = current,
-                        Subject = claimsIdentity
-                    };
-
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
-                    var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
-                    return Ok(new { success = true,userId= userLogin.Id,  token = signedAndEncodedToken });
+                    
+                    return Ok(new { success = true,userId= userLogin.Id, role= roleUser});
                 }
                 else
                 {
@@ -159,12 +138,10 @@ namespace SchoolSchedule.API.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest("Something bad");
+                return BadRequest("Login failed");
             }
-
-           
-
         }
+
         [Route("CreateNewUser")]
         [HttpPost]
         public async Task<IHttpActionResult> CreateUser(User user)
