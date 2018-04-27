@@ -15,20 +15,42 @@ appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
         $routeProvider.when('/NewUser', { templateUrl: 'Views/Management/NewUser/NewUser.html', controller: 'registerUserController' });
         $routeProvider.when('/EditUser', { templateUrl: 'Views/User/UserDetails/EditUser.html', controller: 'editUserController' });
 
-        $routeProvider.when('/LogOut', { controller: 'logoutController' });
+        $routeProvider.when('/Logout', {
+            resolve: {
+                auth: function ($rootScope, $location, $cookies) {
+                    console.log("my logout");
+                    $cookies.logged = false;
+                    $rootScope.Auth = false;
+                    $location.path('/Login');
+
+                }
+            }
+        });
         $routeProvider.otherwise({ redirectTo: '/Home' });
   
 
 });
-appSchoolSchedule.controller('logoutController', function ($cookies, $cookieStore) {
+appSchoolSchedule.controller('logoutController', function ($cookies, $cookieStore, $location) {
    
     if ($cookies.logged) {
+        console.log("get out");
         $cookies.logged = false;
         $cookieStore.remove("logged");
         $location.path('/Login');
+
     }
 
 });
+
+appSchoolSchedule.run(function ($rootScope, $cookies, $http) {
+    if ($cookies.logged == null) {
+        $cookies.logged = false;
+    }
+    $rootScope.Auth = $cookies.logged;
+    console.log('is auth', $cookies.logged);
+});
+    
+ 
 
 //appSchoolSchedule.run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {
 //    $rootScope.$on('$routeChangeStart', function (event) {

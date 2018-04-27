@@ -1,5 +1,5 @@
 ﻿
-appSchoolSchedule.controller('loginController',['$scope', '$location', '$cookies', '$localStorage', 'userService', function ($scope, $location, $cookies, $localStorage, userService) {
+appSchoolSchedule.controller('loginController', ['$scope', '$rootScope', '$location', '$cookies', '$localStorage', 'userService', function ($scope,$rootScope, $location, $cookies, $localStorage, userService) {
     $scope.msg = 'User management';
 
     $scope.login = function (userLogin) {
@@ -7,7 +7,8 @@ appSchoolSchedule.controller('loginController',['$scope', '$location', '$cookies
         userService.login(userLogin).then(function (result) {
             if (result.access_token !== undefined) {
                 $localStorage.token = result.access_token;
-                $cookies.logged =true;
+                $cookies.logged = true;
+                $rootScope.Auth = true;
                 $scope.userId = result.Id;
                 $location.path('/Home');
             }

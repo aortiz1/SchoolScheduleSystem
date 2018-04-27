@@ -21,19 +21,19 @@
                     <!--<li class="nav-item">
                         <a class="nav-link" href="#!UserManagement">User Management</a>
                     </li>-->
-                    <li class="nav-item">
+                    <li ng-show="Auth==true" class="nav-item">
                         <a class="nav-link" href="#!EditUser">Edit Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li ng-show="Auth==true" class="nav-item">
                         <a class="nav-link" href="#!UserDetails">View Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li  ng-show="Auth==false" class="nav-item">
                         <a class="nav-link" href="#!NewUser">Sign in </a>
                     </li>
-                    <li class="nav-item">
+                    <li  ng-show="Auth==false" class="nav-item">
                         <a class="nav-link" href="#!Login">Log in </a>
                     </li>
-                    <li class="nav-item">
+                    <li ng-show="Auth==true" class="nav-item">
                         <a class="nav-link" href="#!Logout">Log out </a>
                     </li>
                 </ul>

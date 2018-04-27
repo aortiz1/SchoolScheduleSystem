@@ -7,7 +7,7 @@ appSchoolSchedule.controller('homeController', function ($scope, userService, au
     authService.authorize();
     if ($cookies.logged) {
         console.log("logged");
-      
+        console.log('is auth', $cookies.get("logged"));
         userService.getUserProfile().then(function (result) {
             if (result.success) {
                 console.log(result);
@@ -18,7 +18,7 @@ appSchoolSchedule.controller('homeController', function ($scope, userService, au
         });
     }
     else {
-        console.log("not logged");
+        $scope.msg = 'Welcome to home page';
     }
  
    
