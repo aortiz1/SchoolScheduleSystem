@@ -179,6 +179,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Services\AuthService.js" />
     <Content Include="Services\CoursesService.js" />
     <Content Include="Services\UserService.js" />
     <Content Include="Services\UtilsService.js" />

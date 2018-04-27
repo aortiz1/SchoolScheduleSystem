@@ -16,7 +16,7 @@
     };
     userServiceObj.getUserProfile = function () {
         var newUser;
-        console.log("the token", $localStorage.token);
+        //console.log("the token", $localStorage.token);
         newUser = $http({
             method: 'Get',
             url: 'http://localhost:55200/api/User/GetUserLoggedInformation',
@@ -77,7 +77,7 @@
         });
         return loginRequest;
     };
-
+    
   
     return userServiceObj;
 });

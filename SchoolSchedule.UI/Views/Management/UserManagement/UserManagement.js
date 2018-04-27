@@ -20,8 +20,8 @@ appSchoolSchedule.controller('userManagementController', function ($scope, $loca
     //    $scope.users = results;
     //})
 
-   
-    
 
 
-})
+
+
+});

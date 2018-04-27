@@ -1,9 +1,11 @@
 ﻿/// <reference path="C:\archivos\SchoolScheduleProject\SchoolScheduleSystem\SchoolSchedule.UI\Services/UserService.js" />
+/// <reference path="C:\archivos\SchoolScheduleProject\SchoolScheduleSystem\SchoolSchedule.UI\Services/AuthService.js" />
 
 
-appSchoolSchedule.controller('homeController', function ($scope, userService) {
+appSchoolSchedule.controller('homeController', function ($scope, userService, authService, $cookies) {
     $scope.msg = 'Welcome to home page';
-    if (userService.logged) {
+    authService.authorize();
+    if ($cookies.logged) {
         console.log("logged");
       
         userService.getUserProfile().then(function (result) {
@@ -18,5 +20,7 @@ appSchoolSchedule.controller('homeController', function ($scope, userService) {
     else {
         console.log("not logged");
     }
+ 
+   
 });
 
