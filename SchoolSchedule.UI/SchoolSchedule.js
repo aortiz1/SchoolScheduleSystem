@@ -1,5 +1,4 @@
 ﻿
-
 //$("#menu-toggle").click(function (e) {
 //    e.preventDefault();
 //    $("#wrapper").toggleClass("toggled");
@@ -13,7 +12,7 @@ appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
         $routeProvider.when('/UserDetails', { templateUrl: 'Views/User/UserDetails/UserDetails.html', controller: 'userDetailsController' });
         //$routeProvider.when('/UserManagement', { templateUrl: 'Views/Management/UserManagement/UserManagement.html', controller: 'userManagementController' });
         $routeProvider.when('/NewUser', { templateUrl: 'Views/Management/NewUser/NewUser.html', controller: 'registerUserController' });
-        $routeProvider.when('/EditUser', { templateUrl: 'Views/User/UserDetails/EditUser.html', controller: 'editUserController' });
+        $routeProvider.when('/EditUser', { templateUrl: 'Views/User/EditUser/EditUser.html', controller: 'editUserController' });
 
         $routeProvider.when('/Logout', {
             resolve: {
@@ -30,17 +29,7 @@ appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
   
 
 });
-appSchoolSchedule.controller('logoutController', function ($cookies, $cookieStore, $location) {
-   
-    if ($cookies.logged) {
-        console.log("get out");
-        $cookies.logged = false;
-        $cookieStore.remove("logged");
-        $location.path('/Login');
 
-    }
-
-});
 
 appSchoolSchedule.run(function ($rootScope, $cookies, $http) {
     if ($cookies.logged == null) {
@@ -52,16 +41,3 @@ appSchoolSchedule.run(function ($rootScope, $cookies, $http) {
     
  
 
-//appSchoolSchedule.run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {
-//    $rootScope.$on('$routeChangeStart', function (event) {
-
-//        if (!$cookies.logged) {
-//            console.log('DENY : Redirecting to Login');
-//            event.preventDefault();
-//            $location.path('/Login');
-//        }
-//        else {
-//            console.log('ALLOW');
-//        }
-//    });
-//}]);

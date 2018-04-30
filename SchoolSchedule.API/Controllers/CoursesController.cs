@@ -39,6 +39,7 @@ namespace SchoolSchedule.API.Controllers
 
         [Route("GetAllDegrees")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GetAllDegrees()
         {
             try
