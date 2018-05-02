@@ -1,4 +1,7 @@
-﻿using SchoolSchedule.BusinessLayer.Contracts;
+﻿using ExpressMapper;
+using SchoolSchedule.API.Models;
+using SchoolSchedule.BusinessLayer.Contracts;
+using SchoolSchedule.DataLayer.Model;
 using SchoolSchedule.Service.Service;
 using System;
 using System.Collections.Generic;
@@ -11,8 +14,8 @@ using System.Web.Http.Cors;
 
 namespace SchoolSchedule.API.Controllers
 {
-    [RoutePrefix("api/Account")]
-    [EnableCors("*", "*", "*")]
+    [RoutePrefix("api/Courses")]
+    //[EnableCors("*", "*", "*")]
     [Authorize]
     public class CoursesController : ApiController
     {
@@ -20,6 +23,11 @@ namespace SchoolSchedule.API.Controllers
         public CoursesController()
         {
             _coursesService = new CoursesService();
+        }
+
+        private void RegisterMappings()
+        {
+          Mapper.Register<Degree, DegreeDTO>();
         }
 
         [Route("GetCoursesByDegree")]
@@ -38,13 +46,14 @@ namespace SchoolSchedule.API.Controllers
         }
 
         [Route("GetAllDegrees")]
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IHttpActionResult> GetAllDegrees()
         {
             try
             {
-                var result = await _coursesService.GetAllDegrees();
+                var query = await _coursesService.GetAllDegrees();
+                var result = Mapper.Map<List<Degree>, List<DegreeDTO>>(query);
                 return Ok(new { success = true, result = result });
             }
             catch (Exception ex)

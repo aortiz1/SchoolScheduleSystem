@@ -1,4 +1,4 @@
-﻿appSchoolSchedule.factory('utilsService', function ($http) {
+﻿appSchoolSchedule.factory('utilsService', function ($http, ) {
     utilsObj = {};
     utilsObj.matchPasswords = function (value, confirmValue) {
         return value == confirmValue;

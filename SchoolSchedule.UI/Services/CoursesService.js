@@ -1,10 +1,22 @@
-﻿appSchoolSchedule.factory('coursesService', function ($http) {
+﻿appSchoolSchedule.factory('coursesService', function ($http, $localStorage) {
     userManagementObj = {};
     userManagementObj.getAllCourses = function (degreeId) {
         var users;
-        users = $http({ method: 'Get', url: 'http://localhost:55200/GetAllUsers' }).
+        users = $http({ method: 'Get', url: 'http://localhost:55200/api/Courses/GetCoursesByDegree?degreeId=' + degreeId }).
         then(function (response) {
             return response.data.result;
+        });
+        return users;
+    };
+    userManagementObj.getAllDegrees = function () {
+        var users;
+        users = $http({ method: 'Get', url: 'http://localhost:55200/api/Courses/GetAllDegrees' }).
+        then(function (response) {
+            console.log('degrees', response.data);
+            return response.data;
+        }, function (error) {
+            console.log(error);
+            return error.data;
         });
         return users;
     };
@@ -12,10 +24,10 @@
         var newUser;
         newUser = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/RegisterStudent', data: user })
         .then(function (response) {
-            return response.data
+            return response.data;
         }, function (error) {
             console.log(error);
-            return error.data
+            return error.data;
         });
         return newUser;
     };

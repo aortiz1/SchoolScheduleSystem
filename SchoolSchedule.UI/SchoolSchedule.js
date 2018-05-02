@@ -1,8 +1,9 @@
 ﻿
-//$("#menu-toggle").click(function (e) {
-//    e.preventDefault();
-//    $("#wrapper").toggleClass("toggled");
-//});
+//var SchoolUtils = SchoolUtils || {};
+//SchoolUtils.helpers = {
+    
+//};
+
 var appSchoolSchedule = angular.module('appSchoolSchedule', ['ngRoute', 'ngCookies', 'ngStorage']);
 
 appSchoolSchedule.config(function ($routeProvider, $httpProvider) {

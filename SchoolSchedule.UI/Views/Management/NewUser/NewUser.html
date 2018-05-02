@@ -40,6 +40,13 @@
                             <input type="text" class="form-control" id="lastNameTxt" ng-model="user.LastName" placeholder="Enter last name">
                         </div>
                         <div class="form-group">
+                            <select class="form-control" >
+                                <option ng-repeat="p in degrees" value="p.id">
+                                    {{p.description}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-secondary" ng-click="createNewUser(user)">SIGN IN</button>
 

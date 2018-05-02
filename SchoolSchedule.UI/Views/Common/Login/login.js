@@ -7,6 +7,9 @@ appSchoolSchedule.controller('loginController', ['$scope', '$rootScope', '$locat
         userService.login(userLogin).then(function (result) {
             if (result.access_token !== undefined) {
                 $localStorage.token = result.access_token;
+                $localStorage.bearerHeader = {
+                    Authorization: 'Bearer ' + result.access_token
+                };
                 $cookies.logged = true;
                 $rootScope.Auth = true;
                 $scope.userId = result.Id;

@@ -16,13 +16,14 @@
     };
     userServiceObj.getUserProfile = function () {
         var newUser;
-        //console.log("the token", $localStorage.token);
+        console.log("bearer", $localStorage.bearerHeader)
         newUser = $http({
             method: 'Get',
             url: 'http://localhost:55200/api/User/GetUserLoggedInformation',
-            headers: {
-                Authorization: 'Bearer ' + $localStorage.token
-            }
+            //headers: {
+            //    Authorization: 'Bearer ' + $localStorage.token
+            //}
+            headers : $localStorage.bearerHeader
         })
         .then(function (response) {
             //console.log("data", response.data.result);
