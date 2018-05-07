@@ -13,6 +13,7 @@ appSchoolSchedule.controller('loginController', ['$scope', '$rootScope', '$locat
                 $localStorage.bearerHeader = {
                     Authorization: 'Bearer ' + result.access_token
                 };
+                $cookies.role = "";
                 $cookies.logged = true;
                 $rootScope.Auth = true;
                 $scope.userId = result.Id;

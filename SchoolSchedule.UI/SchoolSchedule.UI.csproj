@@ -126,6 +126,7 @@
     <Content Include="Content\loading-bar.min.css" />
     <Content Include="Content\open-iconic-bootstrap.css" />
     <Content Include="fonts\open-iconic.svg" />
+    <Content Include="images\circles-light.png" />
     <Content Include="packages.config" />
     <Content Include="SchoolSchedule.html" />
     <Content Include="SchoolSchedule.js" />

@@ -5,7 +5,7 @@
     userServiceObj.logged = false;
     userServiceObj.editUser = function (user) {
         var result;
-        result = $http({ method: 'Post', url: 'http://localhost:55200/api/User/UpdateUserInformation', data: user }).
+        result = $http({ method: 'Post', url: 'http://localhost:55200/api/User/UpdateUserInformation', data: user, headers : $localStorage.bearerHeader }).
         then(function (response) {
             return response.data.result;
         }, function (error) {
