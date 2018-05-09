@@ -19,7 +19,8 @@ appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
             resolve: {
                 auth: function ($rootScope, $location, $cookies) {
                     console.log("my logout");
-                    $cookies.logged = false;
+                    //$cookies.logged = false;
+                    $cookies.put('logged', false);
                     $rootScope.Auth = false;
                     $location.path('/Login');
 
@@ -33,11 +34,17 @@ appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
 
 
 appSchoolSchedule.run(function ($rootScope, $cookies, $http) {
-    if ($cookies.logged == null) {
-        $cookies.logged = false;
-    }
-    $rootScope.Auth = $cookies.logged;
-    console.log('is auth', $cookies.logged);
+    var logged = $cookies.get('logged');
+    if (logged == 'true')
+        logged = true;
+    if (logged == undefined)
+        logged = false;
+
+    //if ($cookies.logged == null) {
+    //    $cookies.logged = false;
+    //}
+    $rootScope.Auth = logged;
+    console.log('is auth', logged);
 });
     
  

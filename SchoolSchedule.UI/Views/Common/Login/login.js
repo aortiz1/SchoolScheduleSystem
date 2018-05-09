@@ -14,7 +14,8 @@ appSchoolSchedule.controller('loginController', ['$scope', '$rootScope', '$locat
                     Authorization: 'Bearer ' + result.access_token
                 };
                 $cookies.role = "";
-                $cookies.logged = true;
+                //    $cookies.logged = true;
+                $cookies.put('logged', true);
                 $rootScope.Auth = true;
                 $scope.userId = result.Id;
                 $location.path('/Home');
