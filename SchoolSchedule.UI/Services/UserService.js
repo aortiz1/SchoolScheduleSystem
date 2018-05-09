@@ -15,9 +15,9 @@
         return result;
     };
     userServiceObj.getUserProfile = function () {
-        var newUser;
+        var currentUser;
         console.log("bearer", $localStorage.bearerHeader)
-        newUser = $http({
+        currentUser = $http({
             method: 'Get',
             url: 'http://localhost:55200/api/User/GetUserLoggedInformation',
             //headers: {
@@ -34,7 +34,7 @@
             console.log(error);
             return error.data;
         });
-        return newUser;
+        return currentUser;
     };
 
     userServiceObj.createNewUser = function (user) {
