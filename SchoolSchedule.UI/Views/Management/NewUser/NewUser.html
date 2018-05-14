@@ -35,18 +35,14 @@
                             <label for="firstNameTxt">First name</label>
                             <input type="text" class="form-control" id="firstNameTxt" ng-model="user.FirstName" placeholder="Enter first name">
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="lastNameTxt">Last name</label>
                             <input type="text" class="form-control" id="lastNameTxt" ng-model="user.LastName" placeholder="Enter last name">
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <label for="cmbDegree">Degree</label>
-                            <select id="cbDegree" ng-model="user.Degree"  class="form-control" >
-                                <option value="null">Select degree</option>
-                                <option ng-repeat="p in degrees" value="p.id">
-                                    {{p.description}}
-                                </option>
-                            </select>
+                            <select  id="cbDegree"  class="form-control" ng-options="item as item.description for item in degrees track by item.id" ng-model="user.LastName"></select>
+                           
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">

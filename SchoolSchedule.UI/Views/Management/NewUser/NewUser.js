@@ -1,12 +1,19 @@
 ﻿appSchoolSchedule.controller('registerUserController', function ($scope, $cookies, $rootScope, $location, $localStorage, utilsService, userService, coursesService) {
     $scope.msg = 'User management';
-    //$scope.findDegrees = function () {
+    
+    coursesService.getAllDegrees().then(function (response) {
+        if (response.success) {
+            console.log("degrees", response.result);
+            var degrees = [];
+            degrees.push({id:'null', description:'Select Degree'})
+            response.result.forEach(function (item) {
+                degrees.push(item);
+            });
+            
+            console.log("degrees all", degrees);
+            $scope.degrees = degrees;
 
-    //};
-    coursesService.getAllDegrees().then(function (result) {
-        if (result.success) {
-            console.log("degrees", result);
-            $scope.degrees = result.result;
+           
         }
     });
     $scope.createNewUser = function (user) {
@@ -48,4 +55,4 @@
     };
 });
 
-// test for develop, wheres the tag
+// test for develop, wheres the tag, lets watch
