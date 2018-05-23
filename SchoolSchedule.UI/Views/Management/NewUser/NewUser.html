@@ -19,10 +19,10 @@
                             <label for="emailTxt">Email address</label>
                             <input type="email" class="form-control" id="emailTxt" ng-model="user.Email" placeholder="Enter email">
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="userNameTxt">Username</label>
                             <input type="text" class="form-control" id="userNameTxt" ng-model="user.UserName" placeholder="Choose your username">
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <label for="passwordTxt">Password</label>
                             <input type="password" class="form-control" id="paswordTxt" ng-model="user.Password" placeholder="Enter password">
@@ -35,14 +35,18 @@
                             <label for="firstNameTxt">First name</label>
                             <input type="text" class="form-control" id="firstNameTxt" ng-model="user.FirstName" placeholder="Enter first name">
                         </div>
-                        <!--<div class="form-group">
+                        <div class="form-group">
                             <label for="lastNameTxt">Last name</label>
                             <input type="text" class="form-control" id="lastNameTxt" ng-model="user.LastName" placeholder="Enter last name">
-                        </div>-->
+                        </div>
                         <div class="form-group">
                             <label for="cmbDegree">Degree</label>
-                            <select  id="cbDegree"  class="form-control" ng-options="item as item.description for item in degrees track by item.id" ng-model="user.LastName"></select>
-                           
+                          <!--  <select  id="cbDegree"  class="form-control" ng-options="item as item.description for item in degrees track by item.id" ng-selected="user.DegreeId == item.id"></select>-->
+                            <select  ng-model="user.DegreeId"  id="cbDegree" >
+                                <option  ng-selected="user.DegreeId == item.id" ng-repeat="item in degrees" value="{{item.id}}">
+                                    {{item.description}}
+                                </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">

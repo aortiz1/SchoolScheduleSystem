@@ -457,7 +457,15 @@ namespace SchoolSchedule.API.Controllers
                     var roles = await UserManager.AddToRoleAsync(user.Id, "Student");
                     if (roles.Succeeded)
                     {
-                        userDB = new User() { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, AspNetUserId = user.Id };
+                        userDB = new User()
+                        {
+                            UserName = model.UserName,
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            Email = model.Email,
+                            AspNetUserId = user.Id,
+                            DegreeId = model.DegreeId
+                        };
                         var resultUser = await _userService.AddNewUser(userDB);
                     }
                     else
