@@ -20,16 +20,16 @@
         });
         return users;
     };
-    userManagementObj.createNewUser = function (user) {
-        var newUser;
-        newUser = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/RegisterStudent', data: user })
+    userManagementObj.getCoursesByStudent = function (userId, semester) {
+        var courses;
+        courses = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/GetCoursesByStudent?userId=' + userId + "&semester=" + semester, data: user })
         .then(function (response) {
             return response.data;
         }, function (error) {
             console.log(error);
             return error.data;
         });
-        return newUser;
+        return courses;
     };
     userManagementObj.login = function (user) {
         var loginRequest;
