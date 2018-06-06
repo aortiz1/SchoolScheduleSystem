@@ -69,11 +69,11 @@ namespace SchoolSchedule.DataLayer.Repository
                 throw argEx;
             }
         }
-        public async Task<List<UserCourse>> GetCoursesByStudent(Guid studentId, int semester)
+        public async Task<List<UserCoursesView>> GetCoursesByStudent(Guid studentId, int semester)
         {
             try
             {
-                var result = await _context.UserCourses.Where(x => x.Semester == semester && x.UserId == studentId).ToListAsync();
+                var result = await _context.UserCoursesViews.Where(x => x.Semester == semester && x.UserId == studentId).ToListAsync();
            
                 return result;
             }

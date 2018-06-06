@@ -11,6 +11,9 @@ GO
 
 
 INSERT [dbo].[Degree] ([Id], [Description]) VALUES (N'eee2e521-c08b-4081-8258-fdd9246a0eae', N'Computer Science Engeneering')
+INSERT [dbo].[Degree] ([Id], [Description]) VALUES (N'8f9eb80b-5201-4bd5-a378-4d09e5d0bc72', N'Electric Engeneering')
+INSERT [dbo].[Degree] ([Id], [Description]) VALUES (N'b26228bb-ff97-40a0-b996-93d2aba3dca0', N'Civil Engeneering')
+INSERT [dbo].[Degree] ([Id], [Description]) VALUES (N'4c3af512-aa1e-416f-a400-f868539ffc6a', N'Electronic Engeneering')
 
 
 
@@ -52,8 +55,7 @@ INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [Se
 
 INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'9A68183E-3DE1-4FC7-A671-F809C5C6305E')
 
-INSERT [dbo].[User] ([Id], [UserName], [FirstName], [LastName], [PasswordHash], [Created], [CurrentSemester], [IsGraduated], [IsExpelled], [AspNetUserId], [Email], [Address], [HomePhone], [Cellphone], [DegreeId]) VALUES (N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', N'testy', N'Testy', N'User', NULL, CAST(N'2018-04-18 11:08:39.267' AS DateTime), 1, 0, 0, N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'testy@mail.com', NULL, NULL, NULL, NULL)
-
+INSERT [dbo].[User] ([Id], [UserName], [FirstName], [LastName], [PasswordHash], [Created], [CurrentSemester], [IsGraduated], [IsExpelled], [AspNetUserId], [Email], [Address], [HomePhone], [Cellphone], [DegreeId]) VALUES (N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', N'testy', N'Testy', N'User', NULL, CAST(N'2018-04-18 11:08:39.267' AS DateTime), 1, 0, 0, N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'testy@mail.com', NULL, NULL, NULL, N'eee2e521-c08b-4081-8258-fdd9246a0eae')
 
 
 
@@ -63,4 +65,5 @@ INSERT [dbo].[User] ([Id], [UserName], [FirstName], [LastName], [PasswordHash], 
 
 --INSERT INTO [dbo].[User]   ([Id]   ,[UserName],[FirstName],[LastName],[Created],[CurrentSemester],[IsGraduated],[IsExpelled],[AspNetUserId],[Email]) VALUES('b898cb00-be75-45c2-b543-b04ce2b9e1af','aortiz','Armando','Ortiz',CURRENT_TIMESTAMP,1,1,0,'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c','aortiz@sciodev.com')
 
+INSERT [dbo].[UserCourse] ([Id], [CourseId], [Created], [Status], [Active], [UserId], [Semester]) VALUES (N'd93d2374-0f27-435b-9aa6-5267677c20bc', N'5e3389a6-b463-4836-9da2-cfa130c3521c', CAST(N'2018-06-06 00:00:00.000' AS DateTime), NULL, 1, N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', 1)
 

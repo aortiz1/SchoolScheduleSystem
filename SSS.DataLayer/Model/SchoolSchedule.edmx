@@ -69,6 +69,22 @@
           <Property Name="Semester" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'SchoolScheduleDB.dbo.UserCoursesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserCoursesView">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StudentName" Type="varchar(max)" />
+          <Property Name="DegreeId" Type="uniqueidentifier" />
+          <Property Name="Degree" Type="varchar(max)" />
+          <Property Name="CourseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Course" Type="varchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Semester" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserProfileView">
           <Key>
@@ -146,6 +162,18 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
           <EntitySet Name="SchoolRole" EntityType="Self.SchoolRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCourse" EntityType="Self.UserCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCoursesView" EntityType="Self.UserCoursesView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserCoursesView].[UserId] AS [UserId], 
+    [UserCoursesView].[StudentName] AS [StudentName], 
+    [UserCoursesView].[DegreeId] AS [DegreeId], 
+    [UserCoursesView].[Degree] AS [Degree], 
+    [UserCoursesView].[CourseId] AS [CourseId], 
+    [UserCoursesView].[Course] AS [Course], 
+    [UserCoursesView].[Active] AS [Active], 
+    [UserCoursesView].[Semester] AS [Semester]
+    FROM [dbo].[UserCoursesView] AS [UserCoursesView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="UserProfileView" EntityType="Self.UserProfileView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [UserProfileView].[Id] AS [Id], 
@@ -251,6 +279,7 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="UserProfileViews" EntityType="SchoolScheduleDBModel.UserProfileView" />
+          <EntitySet Name="UserCoursesViews" EntityType="SchoolScheduleDBModel.UserCoursesView" />
           </EntityContainer>
         <EntityType Name="CourseStatu">
           <Key>
@@ -351,6 +380,20 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
           <Property Name="DegreeId" Type="Guid" />
           <Property Name="Role" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="UserCoursesView">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="StudentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DegreeId" Type="Guid" />
+          <Property Name="Degree" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CourseId" Type="Guid" Nullable="false" />
+          <Property Name="Course" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Semester" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -444,6 +487,20 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCoursesViews">
+            <EntityTypeMapping TypeName="SchoolScheduleDBModel.UserCoursesView">
+              <MappingFragment StoreEntitySet="UserCoursesView">
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

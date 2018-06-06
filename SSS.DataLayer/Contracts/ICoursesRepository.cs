@@ -12,7 +12,7 @@ namespace SchoolSchedule.DataLayer.Contracts
         Task<List<Course>> GetCoursesByDegree(Guid degreeId);
         Task<List<Degree>> GetAllDegrees();
         Task<bool> RegisterToCourse(Guid courseId, Guid studentId);
-        Task<List<UserCourse>> GetCoursesByStudent(Guid studentId, int semester);
+        Task<List<UserCoursesView>> GetCoursesByStudent(Guid studentId, int semester);
 
     }
 }

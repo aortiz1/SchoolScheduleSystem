@@ -34,7 +34,7 @@ namespace SchoolSchedule.Service.Service
             return await _coursesRepository.RegisterToCourse(courseId, studentId);
         }
 
-        public async Task<List<UserCourse>> GetCoursesByStudent(Guid studentId, int semester)
+        public async Task<List<UserCoursesView>> GetCoursesByStudent(Guid studentId, int semester)
         {
             return await _coursesRepository.GetCoursesByStudent(studentId, semester);
         }
