@@ -23,20 +23,24 @@ namespace SchoolSchedule.API.Controllers
         public CoursesController()
         {
             _coursesService = new CoursesService();
+            RegisterMappings();
         }
 
         private void RegisterMappings()
         {
           Mapper.Register<Degree, DegreeDTO>();
+            Mapper.Register<CourseDTO, Course>();
+            Mapper.Register<Course, CourseDTO>();
         }
 
         [Route("GetCoursesByDegree")]
-        [HttpPost]
+        [HttpGet]
         public async Task<IHttpActionResult> GetCoursesByDegree(Guid degreeId)
         {
             try
             {
-                var result = await _coursesService.GetCoursesByDegree(degreeId);
+                var query = await _coursesService.GetCoursesByDegree(degreeId);
+                var result = Mapper.Map<List<Course>, List<CourseDTO>>(query);
                 return Ok(new { success = true, result =  result });
             }
             catch (Exception ex)

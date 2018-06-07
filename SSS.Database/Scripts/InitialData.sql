@@ -51,12 +51,14 @@ INSERT INTO [dbo].[Course]  ([Id] ,[Description] ,[MinimunSemesterAllowed] ,[Pre
 
 
 
+INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]) VALUES (N'7811d9dc-34c5-4c4c-b8ce-fb49499e8197', N'test@mail.com', 0, N'AJCr7JPsXBvRna/WAvTgo1DXU8OeKwpmcmOiCVU16CrlA7aIcv8NwYZdDeLYIwRu4Q==', N'edb5d583-574f-4b5f-b71a-e1bc446e11e4', NULL, 0, 0, NULL, 0, 0, N'test@mail.com')
 INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]) VALUES (N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'testy@mail.com', 0, N'AAP+F0yvVndCLgesgMIMQ/kbrLBD2LQYaVkmEh3gSY8mAdoSMtx1At2AY8M91OHFSA==', N'32cfef2b-9d3f-40a5-a2f5-b4db0a6d1dec', NULL, 0, 0, NULL, 0, 0, N'testy@mail.com')
 
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'7811d9dc-34c5-4c4c-b8ce-fb49499e8197', N'9A68183E-3DE1-4FC7-A671-F809C5C6305E')
 INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'9A68183E-3DE1-4FC7-A671-F809C5C6305E')
 
+INSERT [dbo].[User] ([Id], [UserName], [FirstName], [LastName], [PasswordHash], [Created], [CurrentSemester], [IsGraduated], [IsExpelled], [AspNetUserId], [Email], [Address], [HomePhone], [Cellphone], [DegreeId]) VALUES (N'cd09da0d-614e-4c7c-a5bd-a2c22af96c6e', NULL, N'Test', N'User', NULL, CAST(N'2018-06-07 15:08:01.077' AS DateTime), 1, 0, 0, N'7811d9dc-34c5-4c4c-b8ce-fb49499e8197', N'test@mail.com', NULL, NULL, NULL, N'eee2e521-c08b-4081-8258-fdd9246a0eae')
 INSERT [dbo].[User] ([Id], [UserName], [FirstName], [LastName], [PasswordHash], [Created], [CurrentSemester], [IsGraduated], [IsExpelled], [AspNetUserId], [Email], [Address], [HomePhone], [Cellphone], [DegreeId]) VALUES (N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', N'testy', N'Testy', N'User', NULL, CAST(N'2018-04-18 11:08:39.267' AS DateTime), 1, 0, 0, N'd7475ee7-bc03-4de1-bc6d-d96d04b78627', N'testy@mail.com', NULL, NULL, NULL, N'eee2e521-c08b-4081-8258-fdd9246a0eae')
-
 
 
 --INSERT [dbo].[AspNetUserRoles] ([Id], [UserId], [RoleId]) VALUES (N'32cfdf1f-c73e-47d5-b406-c8d1f8b17436', N'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c', N'9B5A369C-8B88-4B92-8B9D-126FFFB0102A')

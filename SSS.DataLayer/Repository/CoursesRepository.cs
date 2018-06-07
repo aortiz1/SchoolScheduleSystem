@@ -21,7 +21,8 @@ namespace SchoolSchedule.DataLayer.Repository
         {
             try
             {
-                var result = await _context.Courses.Where(c => c.DegreeId == degreeId).ToListAsync();
+                
+                var result = await _context.Courses.Where(c => c.DegreeId == degreeId).ToListAsync<Course>();
                 return result;
             }
             catch (Exception e)

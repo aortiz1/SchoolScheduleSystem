@@ -297,8 +297,10 @@
     <Content Include="Views\Common\Home\Home.js" />
     <Content Include="Views\Common\Login\Login.html" />
     <Content Include="Views\Common\Login\login.js" />
-    <Content Include="Views\Courses\AllCourses\AllCourses.html" />
+    <Content Include="Views\Courses\AllCourses\allCourses.html" />
     <Content Include="Views\Courses\AllCourses\AllCourses.js" />
+    <Content Include="Views\Courses\CoursesByStudent\CoursesByStudent.html" />
+    <Content Include="Views\Courses\CoursesByStudent\CoursesByStudent.js" />
     <Content Include="Views\Courses\SubscribeToCourse\SubscribeToCourse.html" />
     <Content Include="Views\Courses\SubscribeToCourse\SubscribeToCourse.js" />
     <Content Include="Views\Management\NewUser\NewUser.html" />

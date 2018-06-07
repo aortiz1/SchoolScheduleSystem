@@ -1,16 +1,24 @@
 ﻿appSchoolSchedule.factory('coursesService', function ($http, $localStorage) {
-    userManagementObj = {};
-    userManagementObj.getAllCourses = function (degreeId) {
+    coursesObj = {};
+    coursesObj.getAllCourses = function (degreeId) {
         var users;
-        users = $http({ method: 'Get', url: 'http://localhost:55200/api/Courses/GetCoursesByDegree?degreeId=' + degreeId }).
+        users = $http({
+            method: 'Get'
+            , url: 'http://localhost:55200/api/Courses/GetCoursesByDegree?degreeId=' + degreeId
+            , headers: $localStorage.bearerHeader
+        }).
         then(function (response) {
             return response.data.result;
         });
         return users;
     };
-    userManagementObj.getAllDegrees = function () {
+    coursesObj.getAllDegrees = function () {
         var users;
-        users = $http({ method: 'Get', url: 'http://localhost:55200/api/Courses/GetAllDegrees' }).
+        users = $http({
+            method: 'Get'
+            , url: 'http://localhost:55200/api/Courses/GetAllDegrees'
+            , headers: $localStorage.bearerHeader
+        }).
         then(function (response) {
             console.log('degrees', response.data);
             return response.data;
@@ -20,9 +28,13 @@
         });
         return users;
     };
-    userManagementObj.getCoursesByStudent = function (userId, semester) {
+    coursesObj.getCoursesByStudent = function (userId, semester) {
         var courses;
-        courses = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/GetCoursesByStudent?userId=' + userId + "&semester=" + semester, data: user })
+        courses = $http({
+            method: 'Post'
+            , url: 'http://localhost:55200/api/Courses/GetCoursesByStudent?userId=' + userId + "&semester=" + semester
+            , headers: $localStorage.bearerHeader
+        })
         .then(function (response) {
             return response.data;
         }, function (error) {
@@ -31,17 +43,21 @@
         });
         return courses;
     };
-    userManagementObj.login = function (user) {
-        var loginRequest;
-        loginRequest = $http({ method: 'Post', url: 'http://localhost:55200/api/Account/Login', data: user })
+    coursesObj.getCoursesByDegree = function (degreeId) {
+        var courses;
+        courses = $http({
+            method: 'Get'
+            , url: 'http://localhost:55200/api/Courses/GetCoursesByDegree?degreeId=' + degreeId
+            , headers: $localStorage.bearerHeader
+        })
         .then(function (response) {
             return response.data;
-        },
-        function (error) {
+        }, function (error) {
+            console.log(error);
             return error.data;
-        }
-        );
-        return loginRequest;
+        });
+        return courses;
     };
-    return userManagementObj;
+   
+    return coursesObj;
 });

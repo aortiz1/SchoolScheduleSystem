@@ -16,13 +16,9 @@
     };
     userServiceObj.getUserProfile = function () {
         var currentUser;
-        console.log("bearer", $localStorage.bearerHeader)
         currentUser = $http({
             method: 'Get',
             url: 'http://localhost:55200/api/User/GetUserLoggedInformation',
-            //headers: {
-            //    Authorization: 'Bearer ' + $localStorage.token
-            //}
             headers : $localStorage.bearerHeader
         })
         .then(function (response) {

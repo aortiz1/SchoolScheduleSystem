@@ -10,7 +10,7 @@
         if (logged != true)
         {
             event.preventDefault();
-            console.log("fuuu", logged);
+         
             console.log("redirect auht service");
             $location.path('/Login');
         }
