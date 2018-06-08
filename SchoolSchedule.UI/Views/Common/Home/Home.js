@@ -20,7 +20,5 @@ appSchoolSchedule.controller('homeController', function ($scope, userService, au
     else {
         $scope.msg = 'Welcome to home page';
     }
- 
-   
 });
 

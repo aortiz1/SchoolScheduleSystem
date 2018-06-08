@@ -43,6 +43,21 @@
         });
         return courses;
     };
+    coursesObj.registerToCourse = function (courseId, studentId) {
+        var register;
+        register = $http({
+            method: 'Post'
+            , url: 'http://localhost:55200/api/Courses/RegisterToCourse?courseId=' + courseId + "&studentId=" + studentId
+            , headers: $localStorage.bearerHeader
+        })
+        .then(function (response) {
+            return response.data;
+        }, function (error) {
+            console.log(error);
+            return error.data;
+        });
+        return register;
+    };
     coursesObj.getCoursesByDegree = function (degreeId) {
         var courses;
         courses = $http({

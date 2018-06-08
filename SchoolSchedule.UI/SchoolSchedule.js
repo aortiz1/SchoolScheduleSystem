@@ -1,10 +1,4 @@
-﻿/// <reference path="C:\archivos\SchoolScheduleProject\SchoolScheduleSystem\SchoolSchedule.UI\Views/Courses/AllCourses/AllCourses.html" />
-
-//var SchoolUtils = SchoolUtils || {};
-//SchoolUtils.helpers = {
-    
-//};
-
+﻿
 var appSchoolSchedule = angular.module('appSchoolSchedule', ['ngRoute', 'ngCookies', 'ngStorage']);
 
 appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
@@ -16,7 +10,7 @@ appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
         $routeProvider.when('/NewUser', { templateUrl: 'Views/Management/NewUser/NewUser.html', controller: 'registerUserController' });
         $routeProvider.when('/EditUser', { templateUrl: 'Views/User/EditUser/EditUser.html', controller: 'editUserController' });
         $routeProvider.when('/AllCourses', { templateUrl: 'Views/Courses/AllCourses/allCourses.html', controller: 'allCoursesController' });
-
+        $routeProvider.when('/UserCourses', { templateUrl: 'Views/Courses/CoursesByStudent/CoursesByStudent.html' });
         $routeProvider.when('/Logout', {
             resolve: {
                 auth: function ($rootScope, $location, $cookies) {
