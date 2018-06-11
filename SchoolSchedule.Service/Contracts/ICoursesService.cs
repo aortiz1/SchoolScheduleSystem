@@ -13,5 +13,6 @@ namespace SchoolSchedule.BusinessLayer.Contracts
         Task<List<Degree>> GetAllDegrees();
         Task<bool> RegisterToCourse(Guid courseId, Guid studentId);
         Task<List<UserCoursesView>> GetCoursesByStudent(Guid studentId, int semester);
+        Task<List<RemainingCoursesSP_Result>> GetRemainingCourses(Guid? userId, Guid? degreeId);
     }
 }

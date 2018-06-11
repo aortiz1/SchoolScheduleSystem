@@ -155,6 +155,10 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="RemainingCoursesSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="degreeId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <EntityContainer Name="SchoolScheduleDBModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseStatus" EntityType="Self.CourseStatus" Schema="dbo" store:Type="Tables" />
@@ -280,6 +284,10 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
           </AssociationSet>
           <EntitySet Name="UserProfileViews" EntityType="SchoolScheduleDBModel.UserProfileView" />
           <EntitySet Name="UserCoursesViews" EntityType="SchoolScheduleDBModel.UserCoursesView" />
+          <FunctionImport Name="RemainingCoursesSP" ReturnType="Collection(SchoolScheduleDBModel.RemainingCoursesSP_Result)">
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+            <Parameter Name="degreeId" Mode="In" Type="Guid" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="CourseStatu">
           <Key>
@@ -394,6 +402,14 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
           <Property Name="Active" Type="Boolean" />
           <Property Name="Semester" Type="Int32" />
         </EntityType>
+        <ComplexType Name="RemainingCoursesSP_Result">
+          <Property Type="Guid" Name="CourseId" Nullable="false" />
+          <Property Type="String" Name="Course" Nullable="true" />
+          <Property Type="Int32" Name="MinimunSemesterAllowed" Nullable="true" />
+          <Property Type="Guid" Name="PreviousCourseId" Nullable="true" />
+          <Property Type="Guid" Name="DegreeId" Nullable="true" />
+          <Property Type="String" Name="Degree" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -504,6 +520,18 @@ warning 6002: The table/view 'SchoolScheduleDB.dbo.UserProfileView' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RemainingCoursesSP" FunctionName="SchoolScheduleDBModel.Store.RemainingCoursesSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolScheduleDBModel.RemainingCoursesSP_Result">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="MinimunSemesterAllowed" ColumnName="MinimunSemesterAllowed" />
+                <ScalarProperty Name="PreviousCourseId" ColumnName="PreviousCourseId" />
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

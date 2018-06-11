@@ -67,5 +67,6 @@ INSERT [dbo].[User] ([Id], [UserName], [FirstName], [LastName], [PasswordHash], 
 
 --INSERT INTO [dbo].[User]   ([Id]   ,[UserName],[FirstName],[LastName],[Created],[CurrentSemester],[IsGraduated],[IsExpelled],[AspNetUserId],[Email]) VALUES('b898cb00-be75-45c2-b543-b04ce2b9e1af','aortiz','Armando','Ortiz',CURRENT_TIMESTAMP,1,1,0,'1d566a78-28e5-4eb6-85ef-ac1b3ed5923c','aortiz@sciodev.com')
 
+INSERT [dbo].[UserCourse] ([Id], [CourseId], [Created], [Status], [Active], [UserId], [Semester]) VALUES (N'f32e12c3-19c6-44df-bf8c-1249584797b3', N'31bb87d7-a818-4604-a096-299cd6909920', CAST(N'2018-06-08 16:50:02.427' AS DateTime), NULL, 1, N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', 1)
+INSERT [dbo].[UserCourse] ([Id], [CourseId], [Created], [Status], [Active], [UserId], [Semester]) VALUES (N'f11bc650-98e5-48f7-8386-1ac31fe6502f', N'b3178a8c-7328-4b4a-b83f-14ca8cf2a65a', CAST(N'2018-06-08 16:55:06.943' AS DateTime), NULL, 1, N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', 1)
 INSERT [dbo].[UserCourse] ([Id], [CourseId], [Created], [Status], [Active], [UserId], [Semester]) VALUES (N'd93d2374-0f27-435b-9aa6-5267677c20bc', N'5e3389a6-b463-4836-9da2-cfa130c3521c', CAST(N'2018-06-06 00:00:00.000' AS DateTime), NULL, 1, N'9c6a7bd3-e538-41c6-8659-f7f74ee35267', 1)
-

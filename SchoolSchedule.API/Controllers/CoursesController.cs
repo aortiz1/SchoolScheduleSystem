@@ -88,15 +88,30 @@ namespace SchoolSchedule.API.Controllers
 
         [Route("GetCoursesByStudent")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetCoursesByStudent(Guid studentId, int semester)
+        public async Task<IHttpActionResult> GetCoursesByStudent(Guid userId, int semester)
         {
             try
             {
-                var result = await _coursesService.GetCoursesByStudent(studentId, semester);
+                var result = await _coursesService.GetCoursesByStudent(userId, semester);
 
                 return Ok(new { success = true, result = result});
             }
             catch(Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetRemainingCourses")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetRemainingCourses(Guid? userId, Guid? degreeId)
+        {
+            try
+            {
+                var result = await _coursesService.GetRemainingCourses(userId, degreeId);
+                return Ok(new { success = true, result = result });
+            }
+            catch (Exception ex)
             {
                 return this.BadRequest(ex.Message);
             }

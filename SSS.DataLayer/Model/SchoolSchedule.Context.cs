@@ -12,6 +12,8 @@ namespace SchoolSchedule.DataLayer.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SchoolScheduleDBEntities : DbContext
     {
@@ -33,5 +35,18 @@ namespace SchoolSchedule.DataLayer.Model
         public virtual DbSet<UserCourse> UserCourses { get; set; }
         public virtual DbSet<UserProfileView> UserProfileViews { get; set; }
         public virtual DbSet<UserCoursesView> UserCoursesViews { get; set; }
+    
+        public virtual ObjectResult<RemainingCoursesSP_Result> RemainingCoursesSP(Nullable<System.Guid> userId, Nullable<System.Guid> degreeId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(System.Guid));
+    
+            var degreeIdParameter = degreeId.HasValue ?
+                new ObjectParameter("degreeId", degreeId) :
+                new ObjectParameter("degreeId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RemainingCoursesSP_Result>("RemainingCoursesSP", userIdParameter, degreeIdParameter);
+        }
     }
 }

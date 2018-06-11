@@ -18,5 +18,6 @@ namespace SchoolSchedule.DataLayer.Contracts
         //Task<bool> SetRoleToUser(AspNetUserRol roleUser);
 
         Task<UserProfileView> GetUserByEmail(string email);
+      
     }
 }

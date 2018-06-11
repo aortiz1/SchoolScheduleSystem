@@ -80,6 +80,9 @@
     <Compile Include="Model\Degree.cs">
       <DependentUpon>SchoolSchedule.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RemainingCoursesSP_Result.cs">
+      <DependentUpon>SchoolSchedule.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SchoolRole.cs">
       <DependentUpon>SchoolSchedule.tt</DependentUpon>
     </Compile>

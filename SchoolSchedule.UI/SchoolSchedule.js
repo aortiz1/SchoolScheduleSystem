@@ -10,7 +10,7 @@ appSchoolSchedule.config(function ($routeProvider, $httpProvider) {
         $routeProvider.when('/NewUser', { templateUrl: 'Views/Management/NewUser/NewUser.html', controller: 'registerUserController' });
         $routeProvider.when('/EditUser', { templateUrl: 'Views/User/EditUser/EditUser.html', controller: 'editUserController' });
         $routeProvider.when('/AllCourses', { templateUrl: 'Views/Courses/AllCourses/allCourses.html', controller: 'allCoursesController' });
-        $routeProvider.when('/UserCourses', { templateUrl: 'Views/Courses/CoursesByStudent/CoursesByStudent.html' });
+        $routeProvider.when('/UserCourses', { templateUrl: 'Views/Courses/CoursesByStudent/CoursesByStudent.html', controller: 'coursesStudentController' });
         $routeProvider.when('/Logout', {
             resolve: {
                 auth: function ($rootScope, $location, $cookies) {

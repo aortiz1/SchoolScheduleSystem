@@ -38,6 +38,11 @@ namespace SchoolSchedule.Service.Service
         {
             return await _coursesRepository.GetCoursesByStudent(studentId, semester);
         }
+        public async Task<List<RemainingCoursesSP_Result>> GetRemainingCourses(Guid? userId, Guid? degreeId)
+        {
+            return await _coursesRepository.GetRemainingCourses(userId, degreeId);
+        }
+
 
     }
 }

@@ -45,6 +45,20 @@ namespace SchoolSchedule.DataLayer.Repository
             }
         }
 
+        public async Task<List<RemainingCoursesSP_Result>> GetRemainingCourses(Guid? userId, Guid? degreeId)
+        {
+            try
+            {
+                var result =  _context.RemainingCoursesSP(userId, degreeId).ToList();
+                return result;
+            }
+            catch (Exception e)
+            {
+                System.ArgumentException argEx = new System.ArgumentException("Exception", "An error occured on the database", e);
+                throw argEx;
+            }
+        }
+
         public async Task<bool> RegisterToCourse(Guid courseId, Guid studentId)
         {
             try

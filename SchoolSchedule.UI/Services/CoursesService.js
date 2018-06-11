@@ -31,7 +31,7 @@
     coursesObj.getCoursesByStudent = function (userId, semester) {
         var courses;
         courses = $http({
-            method: 'Post'
+            method: 'Get'
             , url: 'http://localhost:55200/api/Courses/GetCoursesByStudent?userId=' + userId + "&semester=" + semester
             , headers: $localStorage.bearerHeader
         })
@@ -74,5 +74,22 @@
         return courses;
     };
    
+    coursesObj.getRemainingCourses = function (userId, degreeId) {
+        var courses;
+        console.log($localStorage.bearerHeader);
+        courses = $http({
+            method: 'Get'
+            , url: 'http://localhost:55200/api/Courses/GetRemainingCourses?userId='+userId+'&degreeId=' + degreeId
+            , headers: $localStorage.bearerHeader
+        })
+        .then(function (response) {
+            return response.data;
+        }, function (error) {
+            console.log(error);
+            return error.data;
+        });
+        return courses;
+    };
+
     return coursesObj;
 });

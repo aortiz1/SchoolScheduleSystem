@@ -70,6 +70,8 @@ namespace SchoolSchedule.API.Controllers
             }
         }
 
+        
+
         [Route("GetUserLoggedInformation")]
         [HttpGet]
         public async Task<IHttpActionResult> GetUserLoggedInformation()

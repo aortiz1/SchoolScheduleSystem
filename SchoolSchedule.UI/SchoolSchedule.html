@@ -28,7 +28,10 @@
                         <a class="nav-link" href="#!UserDetails">View Profile</a>
                     </li>
                     <li ng-show="Auth==true" class="nav-item">
-                        <a class="nav-link" href="#!AllCourses">All courses</a>
+                        <a class="nav-link" href="#!AllCourses">Subscribe to courses</a>
+                    </li>
+                    <li ng-show="Auth==true" class="nav-item">
+                        <a class="nav-link" href="#!UserCourses">My courses</a>
                     </li>
                     <li  ng-show="Auth==false" class="nav-item">
                         <a class="nav-link" href="#!NewUser">Sign in </a>
@@ -78,6 +81,7 @@
 <script src="Views/User/UserDetails/UserDetails.js"></script>
 <script src="Views/Management/UserManagement/UserManagement.js"></script>
 <script src="Views/Courses/AllCourses/AllCourses.js"></script>
+<script src="Views/Courses/CoursesByStudent/CoursesByStudent.js"></script>
 <script src="Services/AuthService.js"></script>
 <script src="Services/CoursesService.js"></script>
 <script src="Views/User/EditUser/EditUser.js"></script>

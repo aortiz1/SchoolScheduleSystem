@@ -7,7 +7,7 @@
         if (result.success === true) {
             $scope.degreeId = result.result.degreeId;
             $scope.studentId = result.result.id;
-            $scope.GetCourses($scope.degreeId);
+            $scope.getRemainingCourses($scope.studentId, $scope.degreeId);
         }
         else
         {
@@ -16,14 +16,15 @@
     });
 
    
-    $scope.GetCourses = function (degreeId) {
-        
-        coursesService.getCoursesByDegree(degreeId).then(function (result) {
-            if (result.success == true) {
+    $scope.getRemainingCourses = function (userId, degreeId) {
+
+        coursesService.getRemainingCourses(userId, degreeId).then(function (result) {
+            if (result.success === true) {
                 $scope.coursesList = result.result;
             }
         });
     };
+
 
     $scope.registerToCourse = function (courseId) {
         coursesService.registerToCourse(courseId, $scope.studentId).then(function (result) {

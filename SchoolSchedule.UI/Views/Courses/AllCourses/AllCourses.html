@@ -11,9 +11,9 @@
             <td></td>
         </tr>
         <tr ng-repeat="item in coursesList">
-            <td>{{item.description}}</td>
+            <td>{{item.course}}</td>
             <td>{{item.minimunSemesterAllowed}}</td>
-            <td><button type="submit" class="btn btn-secondary" ng-click="registerToCourse(item.id)">Subscribe</button></td>
+            <td><button type="submit" class="btn btn-secondary" ng-click="registerToCourse(item.courseId)">Subscribe</button></td>
 
         </tr>
     </table>
