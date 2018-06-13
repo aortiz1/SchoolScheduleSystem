@@ -3,17 +3,12 @@
     
     coursesService.getAllDegrees().then(function (response) {
         if (response.success) {
-            console.log("degrees", response.result);
             var degrees = [];
             degrees.push({id:'null', description:'Select Degree'})
             response.result.forEach(function (item) {
                 degrees.push(item);
             });
-            
-            console.log("degrees all", degrees);
             $scope.degrees = degrees;
-
-           
         }
     });
     $scope.createNewUser = function (user) {
@@ -35,7 +30,7 @@
                             $localStorage.bearerHeader = {
                                 Authorization: 'Bearer ' + result.access_token
                             };
-                            $cookies.logged = true;
+                            $cookies.put('logged', true);
                             $rootScope.Auth = true;
                             $scope.userId = result.Id;
                             $location.path('/Home');

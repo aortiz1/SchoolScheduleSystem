@@ -7,7 +7,7 @@
         var result;
         result = $http({ method: 'Post', url: 'http://localhost:55200/api/User/UpdateUserInformation', data: user, headers : $localStorage.bearerHeader }).
         then(function (response) {
-            return response.data.result;
+            return response.data;
         }, function (error) {
             console.log(error);
             return error.data;
